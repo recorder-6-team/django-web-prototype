@@ -78,6 +78,7 @@ class LocationNamesFormHelper(FormHelper):
         # Names are nested in the location form, so don't need <form> element.
         self.form_tag = False
         self.template = 'bootstrap5/table_inline_formset.html'
+        self.form_id='location-names'
 
 class LocationUpdateView(UpdateView):
   model = Location
