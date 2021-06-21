@@ -3,7 +3,7 @@
 This repository contains the code for a prototype illustrating the potential to use Python and
 Django to develop a web application replacement for Recorder 6.
 
-** Do not use this prototype on a production database **
+**Do not use this prototype on a production databas.**
 
 The prototype currently implements a very small section of Recorder 6 functionality, namely the
 login form, plus a tree browser for locations and the ability to edit the names or other basic
@@ -20,7 +20,7 @@ At this point, as this is a prototype the installation requires some manual step
 machine you are installing onto, or on the network where the database connection has been tested
 from this machine.
 
-** Please create a copy of your Recorder 6 database in order to test this prototype. **
+**Please create a copy of your Recorder 6 database in order to test this prototype.**
 
 ### Steps
 
