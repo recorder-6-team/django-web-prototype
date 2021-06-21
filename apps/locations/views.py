@@ -140,7 +140,7 @@ class LocationUpdateView(UpdateView):
             locationName.location_name_key = row[0]
           locationName.entered_by = self.request.user.name_key_id
           locationName.entry_date = datetime.now()
-          locationName.custodian = settings.CUSTODIAN
+          locationName.custodian = settings.SITE_ID
         else:
           locationName.changed_by = self.request.user.name_key_id
           locationName.changed_date = datetime.now()
