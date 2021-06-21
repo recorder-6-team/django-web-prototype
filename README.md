@@ -60,6 +60,42 @@ from this machine.
    Now save the file. Note - if you are connecting from a non-Windows machine you will need to
    alter the database configuration in the settings file appropriately. More information is
    available at https://github.com/microsoft/mssql-django.
+6. Because the package crispy-bootstrap5 has bugfixes in the latest code, which are not in the last
+   set of released code  we need to uninstall crispy-bootstrap5 then reinstall using the version in
+   Git.
+   ```
+   pip uninstall crispy-bootstrap5
+   pip install git+git://github.com/django-crispy-forms/crispy-bootstrap5
+   ```
+7. Django provides built in functionality for handling user login. In order to make the Recorder 6
+   `USER` table compatible with this functionality, you need to run the contents of each script in
+   the `sqlserver_scripts` folder against your test database copy, e.g. using SQL Management
+   Studio.
+
+# Running the application
+
+Once installed, from your command line or terminal run the following. Make sure you have activated
+the Python virtual environment first as described above.
+
+```
+python manage.py runserver
+```
+
+Note that this method of running Python and Django is not intended for production use but it allows
+the prototype code to be run easily.
+
+Once the command has started Django, you will see somthing like the following in your output:
+```
+Performing system checks...
+
+System check identified no issues (0 silenced).
+June 21, 2021 - 12:21:39
+Django version 3.1.12, using settings 'recorder.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+```
+
+You can access the prototype by copying http://127.0.0.1:8000/ into your browser address bar.
 
 
 
