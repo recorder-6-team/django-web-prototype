@@ -128,24 +128,29 @@ class LocationUpdateView(UpdateView):
     locationNamesForms = LocationNameFormSet(self.request.POST, instance=self.object)
     if locationNamesForms.is_valid():
       for locationNameForm in locationNamesForms:
-        locationName = locationNameForm.save(commit=False)
-        # Null preferreds must be set to false
-        # TODO - is there a better way to do this?
-        if locationName.preferred == None:
-          locationName.preferred = False
-        if locationName.location_name_key == '':
-          # Raw SQL call to populate the location name key.
-          with connection.cursor() as cursor:
-            cursor.execute("SET nocount on; DECLARE @key CHAR(16); EXEC spNextKey 'location_name', @key OUTPUT; SELECT @key;")
-            row = cursor.fetchone()
-            locationName.location_name_key = row[0]
-          locationName.entered_by = self.request.user.name_key_id
-          locationName.entry_date = datetime.now()
-          locationName.custodian = settings.SITE_ID
+        if locationNameForm.cleaned_data.get('DELETE'):
+          locationNameForm.instance.delete()
         else:
-          locationName.changed_by = self.request.user.name_key_id
-          locationName.changed_date = datetime.now()
-        # TODO handle case where name save fails
-        locationName.save()
+          locationName = locationNameForm.save(commit=False)
+          # Skip rows that aren't filled in.
+          if locationName.item_name.strip() != '':
+            # Null preferreds must be set to false
+            # TODO - is there a better way to do this?
+            if locationName.preferred == None:
+              locationName.preferred = False
+            if locationName.location_name_key == '':
+              # Raw SQL call to populate the location name key.
+              with connection.cursor() as cursor:
+                cursor.execute("SET nocount on; DECLARE @key CHAR(16); EXEC spNextKey 'location_name', @key OUTPUT; SELECT @key;")
+                row = cursor.fetchone()
+                locationName.location_name_key = row[0]
+              locationName.entered_by = self.request.user.name_key_id
+              locationName.entry_date = datetime.now()
+              locationName.custodian = settings.SITE_ID
+            else:
+              locationName.changed_by = self.request.user.name_key_id
+              locationName.changed_date = datetime.now()
+            # TODO handle case where name save fails
+            locationName.save()
 
     return result
