@@ -1,0 +1,13 @@
+{% extends "./html.html" %}
+
+{% block page %}
+  {% if request.user.is_authenticated %}
+    {% include "./navbar.html" %}
+  {% endif %}
+  <div class="container">
+    <h1>{% block title %}{% endblock %}</h1>
+    <div>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+{% endblock %}

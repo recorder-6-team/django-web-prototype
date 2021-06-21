@@ -1,0 +1,26 @@
+{% extends 'glue/html.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extraScss %}
+  <link type="text/x-scss" href="{% static 'userlogin/scss/login.scss' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block page %}
+<div class="container vertical-middle">
+  <div class="row login-box">
+    <div class="col-md-12">
+      <form method="post">
+        {% csrf_token %}
+        <div class="overlay"></div>
+        <div class="form-container">
+          <h1>Log in to Recorder</h1>
+          {{ form|crispy }}
+          <button type="submit" class="btn btn-primary">Log In</button>
+        </div>
+        <footer>Installation hosted by {{ form.organisation }}</footer>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

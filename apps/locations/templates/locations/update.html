@@ -1,0 +1,26 @@
+{% extends "glue/page.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load recorder_filters %}
+
+
+{% block title %}{% blocktranslate with name=location|preferred_name %}Editing {{ name }}{% endblocktranslate %}{% endblock %}
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate 'Names' %}</legend>
+    {{ locationnames.management_form }}
+    {% crispy locationnames names_helper %}
+    <button class="btn btn-primary" type="button" id="add-name">Add a name</button>
+  </fieldset>
+  <fieldset>
+    <legend>{% translate 'Details' %}</legend>
+    {{ form | crispy }}
+  </fieldset>
+  <input type="submit" value="Update">
+</form>
+
+{% endblock %}

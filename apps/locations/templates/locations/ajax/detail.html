@@ -1,0 +1,34 @@
+{% load recorder_filters %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <h2>{{ object|preferred_name }}</h2>
+    {% if object.description %}
+      <p>{{ object.descriptions | newlinetohtml | safe }}</p>
+    {% endif %}
+    <dl class="row">
+      {% if object.spatial_ref %}
+        <dt class="col-sm-3">Spatial reference</dt>
+        <dd class="col-sm-9">{{ object.spatial_ref }} ({{ object.spatial_ref_system }} | {{ object.spatial_ref_qualifier }})</dd>
+      {% endif %}
+      {% if object.file_code %}
+        <dt class="col-sm-3">File code</dt>
+        <dd class="col-sm-9">{{ object.file_code }}</dd>
+      {% endif %}
+      {% if object.approach %}
+        <dt class="col-sm-3">Approach</dt>
+        <dd class="col-sm-9">{{ object.approach | newlinetohtml | safe }}</dd>
+      {% endif %}
+      {% if object.restriction %}
+        <dt class="col-sm-3">Restriction</dt>
+        <dd class="col-sm-9">{{ object.restriction | newlinetohtml | safe }}</dd>
+      {% endif %}
+    </dl>
+    <a class="btn btn-primary" href="{% url 'locations:update' object.location_key %}">Edit</a>
+    <input type="hidden" id="map-lat" value="{{ object.lat }}"/>
+    <input type="hidden" id="map-long" value="{{ object.long }}"/>
+  </div>
+</div>
+
+{% endblock %}

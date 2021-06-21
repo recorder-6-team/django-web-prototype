@@ -1,0 +1,40 @@
+$radius: 15px;
+$page-color: #f7f7f7;
+
+body {
+  background: $page-color;
+}
+
+.login-box {
+  border: solid silver 1px;
+  border-radius: $radius;
+  padding: 15%;
+  margin: auto;
+  background: url(../img/meadow.jpg);
+  background-size: cover;
+  form {
+    position: relative;
+    width: 500px;
+    margin: auto;
+    .overlay {
+      top: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: white;
+      opacity: 0.5;
+      border-radius: $radius;
+      z-index: 0;
+    }
+    .form-container {
+      position: relative;
+      z-index: 100;
+      padding: 30px;
+    }
+    footer {
+      text-align: center;
+      font-size: 90%;
+      font-weight: bold;
+    }
+  }
+}

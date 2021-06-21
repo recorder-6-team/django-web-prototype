@@ -1,0 +1,32 @@
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 98%
+);
+
+@import '../bootstrap/scss/bootstrap';
+
+body {
+  background-color: #fdfdfb;
+  font-family: 'Open Sans', sans-serif;
+}
+
+@media (min-width: 1400px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 100%;
+  }
+}
+
+/* Class that can be attached to container to align to middle. */
+.vertical-middle {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  border-bottom: solid silver 1px;
+}
