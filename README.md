@@ -24,20 +24,42 @@ from this machine.
 
 ### Steps
 
-1. Install Python on your machine using the latest version at https://www.python.org/downloads/.
+1. If using Windows, install Python on your machine using the latest version at
+   https://www.python.org/downloads/ (currently version 3.9). During the installation, select the
+   option to add Python to the PATH environment variable. At the end of the installation you will
+   be asked if it is OK to remove the MAX_PATH limitation, please allow this.
+
+   For other operating systems you should find it is already installed, but if not then please
+   install it.
+
+   Note that this installation has not been tested using the version of Python available via the
+   Windows Store.
 2. Make a folder on your machine and grab yourself a copy of the files using the Download button at
    https://github.com/recorder-6-team/django-web-prototype. You can download and unzip the files
    into your folder, or use `git clone` if you are familiar with Git.
-3. Start your Command Line (Windows) or Terminal (Mac/Linux) application and navigate to the root
-   folder of your installation. You should be inside a folder containing a file `requirements.txt`.
-4. Enter the following commands to first create a virtual environment to keep the prototype's
-   installation packages in, then to install these required packages:
+3. Start your Command Line application using Run as Administrator (Windows) or Terminal (Mac/Linux)
+   application and navigate to the root folder of your installation be entering the following,
+   replacing <path> with your installation path:
    ```
-   python -m venv ~/.virtualenvs/recorderdev
+   cd <path>
+   ```
+   You should be inside a folder containing a file `requirements.txt` and a few other files and
+   folders.
+4. Rather than install packages required by the prototype globally, we'll create a virtual
+   environment, which makes it easy to keep everything separate. There are some handy notes on this
+   at https://python.land/virtual-environments/virtualenv.
+
+   On Windows, enter the following commands to first create a virtual environment to keep the
+   prototype's installation packages in, then to install these required packages. For other
+   operating systems please refer to the notes in the above link for modifications:
+   ```
+   python -m venv %HOMEPATH%/.virtualenvs/recorderdev
    %HOMEPATH%\.virtualenvs\recorderdev\Scripts\activate.bat
    pip install -r requirements.txt
    ```
-   Note, if the 2nd command doesn't work try replacing `%HOMEPATH%` with ~.
+   Notes:
+   * If running Mac or Linux and you find any of the commands fail due to lack of permissions, re-run
+     the command with `sudo ` added to the start of the command:
 5. In your installation folder, find the file `local_settings.example.py` and copy it to
    `local_settings.py`. Edit it in a text editor. You will need to find and replace the following
    tokens as follows:
