@@ -63,8 +63,17 @@ from this machine.
    pip install -r requirements.txt
    ```
    Notes:
-   * If running Mac or Linux and you find any of the commands fail due to lack of permissions, re-run
-     the command with `sudo ` added to the start of the command:
+   * The second command above `%HOMEPATH%\.virtualenvs\recorderdev\Scripts\activate.bat` activates
+     the recorderdev virtual environment. When you do this, your command-prompt should show
+     (recorderdev) to the left of the commands you input - this indicates the command will run
+     inside that virtual environment and any Python packages you install will be contained within
+     the `recorderdev` environment. This helps ensure that different Python projects you are
+     working on don't 'pollute' each other with different package versions and it also makes it
+     easier to clean up everything to do with that project. _If you start a new command prompt or
+     terminal, or you notice the (recorderdev) prefix has gone, just re-run this command to
+     re-start the virtual environment.
+   * If running Mac or Linux and you find any of the commands fail due to lack of permissions,
+     re-run the command with `sudo ` added to the start of the command:
 6. In your installation folder, find the file `recorder/local_settings.example.py` and copy it to
    `recorder/local_settings.py`. Edit it in a text editor. You will need to find and replace the following
    tokens as follows:
