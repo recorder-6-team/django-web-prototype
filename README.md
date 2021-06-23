@@ -12,6 +12,8 @@ fields of a location.
 ## Installation
 
 At this point, as this is a prototype the installation requires some manual steps and configration.
+Although the installation isn't trivial, please note that the prototype only needs to be installed
+on a single machine as the application can run from a web-browser anywhere on the network.
 
 ### Prerequisites
 
@@ -24,22 +26,47 @@ from this machine.
 
 ### Steps
 
-1. Install Python on your machine using the latest version at https://www.python.org/downloads/.
-2. Make a folder on your machine and grab yourself a copy of the files using the Download button at
+1. If using Windows, install Python on your machine using the latest version at
+   https://www.python.org/downloads/ (currently version 3.9). During the installation, select the
+   option to add Python to the PATH environment variable. At the end of the installation you will
+   be asked if it is OK to remove the MAX_PATH limitation, please allow this.
+
+   For other operating systems you should find it is already installed, but if not then please
+   install it.
+
+   Note that this installation has not been tested using the version of Python available via the
+   Windows Store.
+2. Also if running Windows, please install the Microsoft Visual C++ Build Tools from
+   https://visualstudio.microsoft.com/visual-cpp-build-tools/. During the installation, select
+   "Desktop development with Visual C++" from the Workloads tab.
+3. Make a folder on your machine and grab yourself a copy of the files using the Download button at
    https://github.com/recorder-6-team/django-web-prototype. You can download and unzip the files
    into your folder, or use `git clone` if you are familiar with Git.
-3. Start your Command Line (Windows) or Terminal (Mac/Linux) application and navigate to the root
-   folder of your installation. You should be inside a folder containing a file `requirements.txt`.
-4. Enter the following commands to first create a virtual environment to keep the prototype's
-   installation packages in, then to install these required packages:
+4. Start your Command Line application using Run as Administrator (Windows) or Terminal (Mac/Linux)
+   application and navigate to the root folder of your installation by entering the following,
+   replacing <path> with your installation path:
    ```
-   python -m venv ~/.virtualenvs/recorderdev
+   cd <path>
+   ```
+   You should be inside a folder containing a file `requirements.txt` and a few other files and
+   folders.
+5. Rather than install packages required by the prototype globally, we'll create a virtual
+   environment, which makes it easy to keep everything separate. There are some handy notes on this
+   at https://python.land/virtual-environments/virtualenv.
+
+   On Windows, enter the following commands to first create a virtual environment to keep the
+   prototype's installation packages in, then to install these required packages. For other
+   operating systems please refer to the notes in the above link for modifications:
+   ```
+   python -m venv %HOMEPATH%/.virtualenvs/recorderdev
    %HOMEPATH%\.virtualenvs\recorderdev\Scripts\activate.bat
    pip install -r requirements.txt
    ```
-   Note, if the 2nd command doesn't work try replacing `%HOMEPATH%` with ~.
-5. In your installation folder, find the file `local_settings.example.py` and copy it to
-   `local_settings.py`. Edit it in a text editor. You will need to find and replace the following
+   Notes:
+   * If running Mac or Linux and you find any of the commands fail due to lack of permissions, re-run
+     the command with `sudo ` added to the start of the command:
+6. In your installation folder, find the file `recorder/local_settings.example.py` and copy it to
+   `recorder/local_settings.py`. Edit it in a text editor. You will need to find and replace the following
    tokens as follows:
      * `#insert-key-here#` - this must be replaced with a unique secret for your installation to
        ensure it is secure. You can generate a secret using a tool built into Django using the
@@ -60,7 +87,7 @@ from this machine.
    Now save the file. Note - if you are connecting from a non-Windows machine you will need to
    alter the database configuration in the settings file appropriately. More information is
    available at https://github.com/microsoft/mssql-django.
-6. Django provides built in functionality for handling user login. In order to make the Recorder 6
+7. Django provides built in functionality for handling user login. In order to make the Recorder 6
    `USER` table compatible with this functionality, you need to run the contents of each script in
    the `sqlserver_scripts` folder against your test database copy, e.g. using SQL Management
    Studio.
