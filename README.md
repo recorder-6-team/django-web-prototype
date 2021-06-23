@@ -101,6 +101,12 @@ from this machine.
    Now save the file. Note - if you are connecting from a non-Windows machine you will need to
    alter the database configuration in the settings file appropriately. More information is
    available at https://github.com/microsoft/mssql-django.
+
+   Also, note that the database connection configuration given here requires Windows Authentication
+   to be enabled. If you would prefer to connect as a named user, you can set the `USER`, `PASSWORD`
+   and `Trusted_Connection=no` options as described at https://github.com/microsoft/mssql-django.
+   The connection method you use must be for a user with rights to select and modify data in the
+   `NAME`, `USER`, `LOCATION`, `LOCATION_NAME` and `LOCATION_TYPE` tables.
 7. Django provides built in functionality for handling user login. In order to make the Recorder 6
    `USER` table compatible with this functionality, you need to run the contents of each script in
    the `sqlserver_scripts` folder against your test database copy, e.g. using SQL Management
