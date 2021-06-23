@@ -133,7 +133,7 @@ STATICFILES_FINDERS = [
 
 COMPRESS_PRECOMPILERS = (
     # Enable SASS scss precompilation to css.
-    ('text/x-scss', 'sass {infile} {outfile}'),
+    ('text/x-scss', 'django_libsass.SassCompiler'),
     # Enable Django templating in JS files.
     ('text/javascript', 'compressor.filters.template.TemplateFilter'),
 )
