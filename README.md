@@ -111,6 +111,10 @@ from this machine.
    `USER` table compatible with this functionality, you need to run the contents of each script in
    the `sqlserver_scripts` folder against your test database copy, e.g. using SQL Management
    Studio.
+8. Finally, run the following from your command-prompt/terminal in order to prepare the database:
+   ```
+   python manage.py migrate
+   ```
 
 # Running the application
 
