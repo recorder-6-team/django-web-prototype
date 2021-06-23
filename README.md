@@ -70,9 +70,14 @@ from this machine.
    tokens as follows:
      * `#insert-key-here#` - this must be replaced with a unique secret for your installation to
        ensure it is secure. You can generate a secret using a tool built into Django using the
-       following command:
+       Python shell by running the following commands from your command prompt. The first command
+       starts the shell, then the >>> indicates that subsequent commands will run using the Python
+       interpreter:
        ```
-       python manage.py shell -c 'from django.core.management import utils; print(utils.get_random_secret_key())'
+       python
+       >>> from django.core.management import utils
+       >>> print(utils.get_random_secret_key())
+       >>> exit()
        ```
      * `#Insert name of testing database#` - The name of the database you are connecting to. For
        production this would typically be `NBNData` but make sure you are using a copy for testing
