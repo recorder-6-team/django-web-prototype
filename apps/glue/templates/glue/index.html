@@ -3,24 +3,27 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam ex ut nunc
-  mattis, eu tristique libero ultricies. Proin luctus aliquam metus a iaculis. Nam a
-  risus et sapien dignissim accumsan nec vel turpis. Phasellus vel massa dapibus, interdum
-  ex eu, pellentesque nisl. Duis sed dui viverra, sollicitudin massa ac, euismod risus.
-  Vestibulum quis tortor ultricies, consequat felis ac, vestibulum quam. Cras sit amet
-  nunc placerat, imperdiet eros vitae, pharetra sapien. Proin ut augue et felis porta
-  fringilla eu non justo.</p>
+<h2>Recorder web prototype</h2>
 
-<p>Phasellus pretium ut sem in egestas. Ut sapien risus, lobortis at diam id, faucibus
-  hendrerit eros. Sed sollicitudin rutrum odio vel mollis. Donec diam eros, tempor id
-  efficitur eget, varius eget massa. Aliquam ultricies, mi vitae hendrerit consectetur,
-  dolor odio varius erat, quis malesuada urna tellus a ligula. Phasellus porta diam ligula,
-  a lobortis ante varius et. Phasellus accumsan, tellus et lacinia mollis, augue ipsum
-  aliquam leo, ut luctus risus sapien et justo. Aliquam varius sagittis rutrum. Class
-  aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-  Quisque facilisis, felis id sodales sodales, mi metus auctor orci, fermentum sodales
-  turpis nisl vitae libero. Nam nisl justo, aliquet a ornare sed, molestie at neque. In ut
-  odio dui. Aliquam consectetur lacus augue, ac ornare erat tincidunt euismod. Aenean
-  ornare nisi sed neque imperdiet, eget sagittis augue tristique. Donec semper euismod ex,
-  ut aliquet est tincidunt consequat.</p>
+<p>You are running an experimental prototype demonstrating a small portion of Recorder 6's
+  functionality rebuilt to run in a web-browser, using the Python language and Django
+  framework.</p>
+
+<p>This prototype is limited to the following areas of functionality:</p>
+<ul>
+  <li>Login screen</li>
+  <li>Data entry -> Locations allows you to browse a simple hierarchy of top-level locations. Click
+    the small arrow to the left of a location name to expand and view the children.</li>
+  <li>Locations can be selected to preview, including the map panning to the correct point.</li>
+  <li>Edit button for locations takes you to an Edit screen, allowing basic location information to
+    be edited. This includes a "nested formset" table for location names, which illustrates how
+    Django can be used to develop complex nested forms including concepts like measurements, site
+    features and sources.</li>
+</ul>
+
+<h2>Further information</h2>
+<ul>
+  <li><a href="https://www.djangoproject.com/">Django website</a></li>
+  <li><a href="https://github.com/recorder-6-team/django-web-prototype/">Recorder web prototype code on Github</a></li>
+</ul>
 {% endblock %}
