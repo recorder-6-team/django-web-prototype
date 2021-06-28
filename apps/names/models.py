@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from apps.glue import FixedCharField
 
 class R6UserManager(BaseUserManager):
@@ -30,7 +30,7 @@ class Name(models.Model):
         managed = False
         db_table = 'NAME'
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     name_key = models.OneToOneField(Name, models.DO_NOTHING, db_column='NAME_KEY', primary_key=True)  # Field name made lowercase.
     password = models.CharField(db_column='PASSWORD', max_length=20)  # Field name made lowercase.
     security_level = models.SmallIntegerField(db_column='SECURITY_LEVEL')  # Field name made lowercase.
@@ -43,6 +43,9 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
+
+    is_superuser = True
+    is_staff = True
 
     def __str__(self):
         return self.username

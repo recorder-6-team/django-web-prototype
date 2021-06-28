@@ -25,6 +25,9 @@ class LocationType(models.Model):
         managed = False
         db_table = 'LOCATION_TYPE'
 
+    def __str__(self):
+        return self.short_name
+
 class Location(models.Model):
     location_key = models.CharField(db_column='LOCATION_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
     description = RtfTextField(db_column='DESCRIPTION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
@@ -47,8 +50,13 @@ class Location(models.Model):
 
     class Meta:
         managed = False
-        # Use view to obtain calculated preferred_location_name.
         db_table = 'LOCATION'
+
+    def __str__(self):
+        for name in self.names.all():
+            if name.preferred:
+                return name.item_name
+        return 'Unknown'
 
     def get_absolute_url(self):
         return f"/locations/{self.location_key}/"
