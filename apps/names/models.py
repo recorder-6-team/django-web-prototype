@@ -44,8 +44,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
 
-    is_superuser = True
-    is_staff = True
+    @property
+    def is_superuser(self):
+        return self.security_level >= 5
+
+    @property
+    def is_staff(self):
+        return self.security_level >= 4
 
     def __str__(self):
         return self.username
