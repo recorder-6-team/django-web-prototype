@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class LocationsApiConfig(AppConfig):
-    name = 'locations_api'
+    name = 'apps.locations.locations_api'
