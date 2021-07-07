@@ -44,7 +44,9 @@ $('#tree-container')
         const view = recorder.map.getView();
         recorder.markerLayer.getSource().addFeature(marker);
         view.setCenter(ol.proj.fromLonLat(point));
-        view.setZoom(9);
+        // Set an arbitrary zoom. Would be better if this could be set
+        // according to the site boundary.
+        view.setZoom(12);
       }
     });
   });
