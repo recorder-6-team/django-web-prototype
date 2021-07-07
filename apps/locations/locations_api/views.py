@@ -17,4 +17,7 @@ class LocationViewSet(viewsets.ModelViewSet):
       queryset = Location.objects.all()
       # Ensure location names available without additional query.
       queryset = queryset.prefetch_related('names')
+      # Sort by name.
+      # TODO ensure the sort is by the preferred name.
+      queryset = queryset.order_by('names__item_name')
       return queryset
