@@ -19,9 +19,11 @@
     be edited. This includes a "nested formset" table for location names, which illustrates how
     Django can be used to develop complex nested forms including concepts like measurements, site
     features and sources.</li>
-  <li><a href="admin">Admin user interface</a> which allows browsing and editing of the "raw" data for
-    admin and full edit level users. Currently limited to the Location table and related tables
-    implemented in the main user interface, plus the User table.</li>
+  <li><a href="admin">Admin user interface</a> which allows browsing and updating of the "raw" data
+    for admin and full edit level users. Currently limited to the Location table and related tables
+    implemented in the main user interface, plus the User table. Creating of new records is not yet
+    possible due to the need to link the admin interface to the way Recorder generates new unique
+    keys.</li>
   <li><a href="/api/locations/">REST API for the Locations data</a> which illustrates how data can
     be easily exposed to other applications.</li>
 </ul>
