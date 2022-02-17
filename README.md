@@ -145,5 +145,6 @@ You can access the prototype by copying http://127.0.0.1:8000/ into your browser
 
 1. Install vagrant
 2. Install ansible
-3. `$ vagrant up`
-4. browse to http://localhost:8000/
+3. move `host_vars/default.example.yml` to `host_vars/default.yml` and configure appropriately
+4. `$ vagrant up`
+5. browse to http://localhost:8000/
