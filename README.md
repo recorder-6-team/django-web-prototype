@@ -77,7 +77,7 @@ from this machine.
 6. In your installation folder, find the file `recorder/local_settings.example.py` and copy it to
    `recorder/local_settings.py`. Edit it in a text editor. You will need to find and replace the following
    tokens as follows:
-     * `#insert-key-here#` - this must be replaced with a unique secret for your installation to
+     * `{{ recorder_secret_key }}` - this must be replaced with a unique secret for your installation to
        ensure it is secure. You can generate a secret using a tool built into Django using the
        Python shell by running the following commands from your command prompt. The first command
        starts the shell, then the >>> indicates that subsequent commands will run using the Python
@@ -88,16 +88,17 @@ from this machine.
        >>> print(utils.get_random_secret_key())
        >>> exit()
        ```
-     * `#Insert name of testing database#` - The name of the database you are connecting to. For
-       production this would typically be `NBNData` but make sure you are using a copy for testing
-       the prototype.
-     * `#insert datatabase host here#` - The SQL Server instance name you are connecting to. The
-       correct setting for this can be obtained from Recorder 6's registry setting at `HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Dorset Software\Recorder 6`
-       under the key called `Server Name`.
-     * `#Insert your name or your organisation name here#` - just set this to the name or your
+     * `{{ recorder_database_name }}` - The name of the database you are
+       connecting to. For production this would typically be `NBNData` but make
+       sure you are using a copy for testing the prototype.
+     * `{{ recorder_database_host }}` - The SQL Server instance name you are
+       connecting to. The correct setting for this can be obtained from Recorder
+       6's registry setting at `HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Dorset
+       Software\Recorder 6` under the key called `Server Name`.
+     * `{{ recorder_organisation_name }}` - just set this to the name or your
        organisation would like to be indentified as.
-     * `#Insert your 8 character recorder licence site ID here#` - your installation Site ID. For
-       testing only, this can be set to `TESTDATA`.
+     * `{{ recorder_site_id }}` - your installation Site ID. For testing only, this can be set to `TESTDATA`.
+
    Now save the file. Note - if you are connecting from a non-Windows machine you will need to
    alter the database configuration in the settings file appropriately. More information is
    available at https://github.com/microsoft/mssql-django.
@@ -141,6 +142,10 @@ Quit the server with CTRL-BREAK.
 
 You can access the prototype by copying http://127.0.0.1:8000/ into your browser address bar.
 
+# Installing and running through vagrant
 
-
-
+1. Install vagrant
+2. Install ansible
+3. move `host_vars/default.example.yml` to `host_vars/default.yml` and configure appropriately
+4. `$ vagrant up`
+5. browse to http://localhost:8000/

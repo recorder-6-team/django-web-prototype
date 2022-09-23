@@ -1,0 +1,52 @@
+---
+
+- name: Provisioning playbook
+  hosts: default
+  become: yes
+  tasks:
+    - name: Install python3 and pip and sql.h for pyodbc installed through requirements.txt
+      apt:
+        name:
+          - unixodbc-dev
+          - python3
+          - python3-pip
+        state: latest
+        update_cache: yes
+
+    - name: Install requiremens
+      pip:
+        requirements: /vagrant/requirements.txt
+        state: latest
+
+    - name: Copy configuration
+      template:
+        src: recorder/local_settings.example.py
+        dest: /vagrant/recorder/local_settings.py
+      vars:
+        recorder_secret_key: ALARMALARM
+        recorder_organisation_name: MnhnL
+        recorder_site_id: TESTDATA
+
+    - name: Import MS key
+      shell: curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+
+    - name: Register MS repo
+      shell: curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+
+    - name: Install tools
+      apt:
+        name: mssql-tools
+        state: latest
+        update_cache: yes
+      environment:
+        ACCEPT_EULA: y
+        DEBIAN_FRONTEND: noninteractive
+
+    - name: Run pre-migrations
+      shell: '/opt/mssql-tools/bin/sqlcmd -S {{ recorder_database_host }} -d {{ recorder_database_name }} -U {{ recorder_database_user }} -i /vagrant/sqlserver_scripts/USER.sql -P {{ recorder_database_password }}'
+
+    - name: Run django migrations
+      shell: python3 /vagrant/manage.py migrate
+
+    - name: Run the application
+      shell: nohup python3 /vagrant/manage.py runserver 0.0.0.0:8000 </dev/null >/dev/null 2>&1 &

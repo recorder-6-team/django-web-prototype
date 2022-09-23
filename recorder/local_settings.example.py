@@ -1,5 +1,5 @@
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#insert-key-here#'
+SECRET_KEY = '{{ recorder_secret_key }}'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -15,20 +15,22 @@ ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': '#Insert name of testing database#',
-        'HOST': '#insert datatabase host here#',
+        'NAME': '{{ recorder_database_name }}',
+        'HOST': '{{ recorder_database_host }}',
         'PORT': '',
+        'USER': '{{ recorder_database_user }}',
+        'PASSWORD': '{{ recorder_database_password }}',
         'OPTIONS': {
-            #'driver': 'ODBC Driver 17 for SQL Server',
-            'driver': 'SQL Server Native Client 11.0',
+            'driver': 'ODBC Driver 17 for SQL Server',
+            #'driver': 'SQL Server Native Client 11.0',
         },
     }
 }
 
-ORGANISATION_NAME = '#Insert your name or your organisation name here#'
+ORGANISATION_NAME = '{{ recorder_organisation_name }}'
 
 # Your 8 character Recorder licence Site ID.
-SITE_ID = '#Insert your 8 character recorder licence site ID here#'
+SITE_ID = '{{ recorder_site_id }}'
 
 
 """
