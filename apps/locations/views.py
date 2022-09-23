@@ -35,9 +35,13 @@ class LocationListView(TemplateView):
 class LocationDetailView(DetailView):
   model = Location
 
+  # Is the request AJAX?
+  def __request_is_ajax(self):
+    return self.request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
   # Enable AJAX request for details without HTML template, so it can be shown alongside treeview.
   def get_template_names(self):
-    if self.request.is_ajax():
+    if self.__request_is_ajax():
       # Ajax request for details just renders a details block.
       return [
         'locations/ajax/detail.html',
@@ -51,7 +55,7 @@ class LocationDetailView(DetailView):
   # Attach map assets for non-ajax locations detail view.
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
-    if not self.request.is_ajax():
+    if not self.__request_is_ajax():
       context['externalJs'] = [
         'https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js',
       ]
