@@ -31,7 +31,7 @@ CONTRIB_APPS = [
     'compressor',
     "crispy_forms",
     "crispy_bootstrap5",
-    'fontawesome_5',
+    'fontawesome_6',
     "rest_framework",
     'django_filters',
 ]

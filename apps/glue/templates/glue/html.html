@@ -1,7 +1,7 @@
 <!doctype html>
 {% load compress %}
 {% load static %}
-{% load fontawesome_5 %}
+{% load fontawesome_6 %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -14,7 +14,7 @@
     {% endcompress %}
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+San&display=swap" rel="stylesheet">
-    {% fontawesome_5_static %}
+    {% fontawesome_6_static %}
     {% if externalCss %}{% for css in externalCss %}<link rel="stylesheet" href="{{ css }}" type="text/css">{% endfor %}{% endif %}
     <title>Recorder web prototype</title>
   </head>
