@@ -1,0 +1,18 @@
+{# Other info - approach section update form for a location #}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load recorder_filters %}
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate 'Other info - approach' %}</legend>
+    {{ form | crispy }}
+  </fieldset>
+  <input type="submit" value="Update">
+</form>
+
+{% endblock %}

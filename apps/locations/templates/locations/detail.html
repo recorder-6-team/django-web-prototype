@@ -1,3 +1,6 @@
+{# Full page details view for a location #}
+{# TODO remove if no longer needed, or consider keeping updated so can link to a location. #}
+
 {% extends "glue/page.html" %}
 {% load recorder_filters %}
 {% load fontawesome_6 %}
@@ -9,7 +12,7 @@
 <div class="row">
   <div class="col-md-6">
     {% include 'locations/includes/view/general.html' %}
-    <a href="{% url 'locations:update' object.location_key %}">{% fa6_icon 'github' 'fab' %}</a>
+    <a href="{% url 'locations:updateGeneral' object.location_key %}">{% fa6_icon 'github' 'fab' %}</a>
   </div>
   <div class="col-md-6">
     <div id="map" class="map" style="height: 400px"></div>

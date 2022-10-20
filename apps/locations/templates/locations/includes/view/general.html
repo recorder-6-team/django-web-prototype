@@ -1,3 +1,5 @@
+{# Snippet to view location details - General #}
+
 {% load recorder_filters %}
 
 {% if object.description %}
@@ -15,13 +17,5 @@
   {% if object.file_code %}
     <dt class="col-sm-3">File code</dt>
     <dd class="col-sm-9">{{ object.file_code }}</dd>
-  {% endif %}
-  {% if object.approach %}
-    <dt class="col-sm-3">Approach</dt>
-    <dd class="col-sm-9">{{ object.approach | newlinetohtml | safe }}</dd>
-  {% endif %}
-  {% if object.restriction %}
-    <dt class="col-sm-3">Restriction</dt>
-    <dd class="col-sm-9">{{ object.restriction | newlinetohtml | safe }}</dd>
   {% endif %}
 </dl>
