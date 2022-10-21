@@ -12,7 +12,7 @@
 <div class="row">
   <div class="col-md-6">
     {% include 'locations/includes/view/general.html' %}
-    <a href="{% url 'locations:updateGeneral' object.location_key %}">{% fa6_icon 'github' 'fab' %}</a>
+    <a href="{% url 'locations:update-general' object.location_key %}">{% fa6_icon 'github' 'fab' %}</a>
   </div>
   <div class="col-md-6">
     <div id="map" class="map" style="height: 400px"></div>

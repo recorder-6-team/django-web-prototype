@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('#add-name').click(function() {
+  $(document).on('click', '#location-add-name', {}, function (e) {
     var formIdx = $('#id_names-TOTAL_FORMS').val();
     $('#location-names_table tbody').append($('tr.empty-form')[0].outerHTML
       .replace(/__prefix__/g, formIdx)
@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   // Fake radio behaviour on the preferred name column.
   // TODO find a better way than td:nth-child(2) to select preferred column checkboxes.
-  $('#location-names_table td:nth-child(2) .checkboxinput').click(function() {
+  $(document).on('click', '#location-names_table td:nth-child(2) .checkboxinput', {}, function (e) {
     $('#location-names_table td:nth-child(2) .checkboxinput').prop('checked', false);
     $(this).prop('checked', true);
     // Undelete it.
@@ -17,7 +17,7 @@ $(document).ready(function() {
   });
 
   // Block delete of preferred name row.
-  $('#location-names_table td:nth-child(4) .checkboxinput').click(function() {
+  $(document).on('click', '#location-names_table td:nth-child(4) .checkboxinput', {}, function (e) {
     if ($(this).closest('tr').find('td:nth-child(2) .checkboxinput').prop('checked')) {
       $(this).prop('checked', false)
     }

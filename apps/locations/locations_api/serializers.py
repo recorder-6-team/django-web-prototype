@@ -6,7 +6,6 @@ class LocationNameSerializer(serializers.ModelSerializer):
         model = LocationName
         fields = ['item_name', 'preferred']
 
-
 class LocationSerializer(serializers.ModelSerializer):
   class Meta:
         model = Location

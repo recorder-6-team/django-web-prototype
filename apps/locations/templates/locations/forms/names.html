@@ -1,0 +1,20 @@
+{# Names section update form for a location #}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load recorder_filters %}
+
+{% block content %}
+
+<form method="post" id="location-names-form">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate 'Names' %}</legend>
+    {{ locationnames.management_form }}
+    {% crispy locationnames names_helper %}
+    <button class="btn btn-secondary" type="button" id="location-add-name" title="{% translate 'Add a name' %}"><i class="fa-solid fa-plus"></i></button>
+  </fieldset>
+  <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
+</form>
+
+{% endblock %}

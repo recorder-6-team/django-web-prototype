@@ -4,6 +4,11 @@ from django.utils.translation import gettext as _
 
 LocationNameFormSet = forms.inlineformset_factory(Location, LocationName, fields=('item_name','preferred',), extra=1)
 
+class LocationUpdateNamesForm(forms.ModelForm):
+  class Meta:
+    model = Location
+    fields = [ ]
+
 class LocationUpdateGeneralForm(forms.ModelForm):
   class Meta:
     model = Location

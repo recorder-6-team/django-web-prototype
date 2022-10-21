@@ -1,34 +1,58 @@
+{# Detail of a location to be loaded via AJAX into a div #}
+
 {% load recorder_filters %}
+{% load i18n %}
+{% load fontawesome_6 %}
 
 {% block content %}
-<div class="row">
-  <div class="col-md-12">
-    <h2>{{ object|preferred_name }}</h2>
-    {% if object.description %}
-      <p>{{ object.descriptions | newlinetohtml | safe }}</p>
-    {% endif %}
-    <dl class="row">
-      {% if object.spatial_ref %}
-        <dt class="col-sm-3">Spatial reference</dt>
-        <dd class="col-sm-9">{{ object.spatial_ref }} ({{ object.spatial_ref_system }} | {{ object.spatial_ref_qualifier }})</dd>
-      {% endif %}
-      {% if object.file_code %}
-        <dt class="col-sm-3">File code</dt>
-        <dd class="col-sm-9">{{ object.file_code }}</dd>
-      {% endif %}
-      {% if object.approach %}
-        <dt class="col-sm-3">Approach</dt>
-        <dd class="col-sm-9">{{ object.approach | newlinetohtml | safe }}</dd>
-      {% endif %}
-      {% if object.restriction %}
-        <dt class="col-sm-3">Restriction</dt>
-        <dd class="col-sm-9">{{ object.restriction | newlinetohtml | safe }}</dd>
-      {% endif %}
-    </dl>
-    <a class="btn btn-primary" href="{% url 'locations:update' object.location_key %}">Edit</a>
-    <input type="hidden" id="map-lat" value="{{ object.lat }}"/>
-    <input type="hidden" id="map-long" value="{{ object.long }}"/>
-  </div>
-</div>
+<input type="hidden" id="map-lat" value="{{ object.lat }}"/>
+<input type="hidden" id="map-long" value="{{ object.long }}"/>
+
+<article class="data-details" id="accordion">
+  <input type="hidden" id="location-key" value="{{ object.location_key }}" />
+
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-names" data-bs-toggle="collapse" class="card-title">{% translate 'Names' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="names">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-names" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-names">
+          {% include 'locations/includes/view/names.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-general" data-bs-toggle="collapse" class="card-title">{% translate 'General' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="general">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-general" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-general">
+          {% include 'locations/includes/view/general.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-other-approach" data-bs-toggle="collapse" class="card-title">{% translate 'Other info - approach' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="other-approach">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-other-approach" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-other-approach">
+          {% include 'locations/includes/view/other-approach.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</article>
 
 {% endblock %}
