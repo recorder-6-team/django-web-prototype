@@ -11,13 +11,16 @@ class LocationViewSet(viewsets.ModelViewSet):
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = {
       'parent_key': ['exact', 'isnull'],
+      'location_type_key': ['exact']
     }
 
     def get_queryset(self):
       queryset = Location.objects.all()
       # Ensure location names available without additional query.
       queryset = queryset.prefetch_related('names')
-      # Sort by name.
       # TODO ensure the sort is by the preferred name.
-      queryset = queryset.order_by('names__item_name')
+      # TODO sort - the following seems to break the response where there are multiple names.
+      # queryset = queryset.order_by('names__item_name')
+      # Default order by key until issue with name sort is fixed.
+      queryset = queryset.order_by('location_key')
       return queryset
