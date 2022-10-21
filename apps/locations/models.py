@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from apps.glue import RtfTextField
+from apps.names.models import Name
 
 class LocationType(models.Model):
     location_type_key = models.CharField(db_column='LOCATION_TYPE_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
@@ -100,7 +101,7 @@ class LocationDesignation(models.Model):
     location_key = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY', related_name='designations')  # Field name made lowercase.
     site_status_key = models.ForeignKey('SiteStatus', models.DO_NOTHING, db_column='SITE_STATUS_KEY')  # Field name made lowercase.
     ref_code = models.CharField(db_column='REF_CODE', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    # authority = models.ForeignKey('Name', models.DO_NOTHING, db_column='AUTHORITY')  # Field name made lowercase.
+    authority = models.ForeignKey(Name, models.DO_NOTHING, db_column='AUTHORITY')  # Field name made lowercase.
     date_from = models.DateTimeField(db_column='DATE_FROM', blank=True, null=True)  # Field name made lowercase.
     date_to = models.DateTimeField(db_column='DATE_TO', blank=True, null=True)  # Field name made lowercase.
     comment = models.TextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
