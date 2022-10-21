@@ -1,0 +1,20 @@
+{# Designations section update form for a location #}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load recorder_filters %}
+
+{% block content %}
+
+<form method="post" id="location-designations-form">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate 'Designations' %}</legend>
+    {{ locationdesignations.management_form }}
+    {% crispy locationdesignations designations_helper %}
+    <button class="btn btn-secondary" type="button" id="location-add-designation" title="{% translate 'Add a designation' %}"><i class="fa-solid fa-plus"></i></button>
+  </fieldset>
+  <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
+</form>
+
+{% endblock %}

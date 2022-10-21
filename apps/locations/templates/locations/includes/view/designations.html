@@ -1,0 +1,9 @@
+{# Snippet to view location details - Designations #}
+
+{% load recorder_filters %}
+
+<ul>
+{% for designation in object.designations.all %}
+  <li>{{ designation.site_status_key.short_name }}</li>
+{% endfor %}
+</ul>

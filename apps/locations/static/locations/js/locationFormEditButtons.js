@@ -36,6 +36,7 @@ $(document).ready(function() {
 
   setupFormSubmitButton('names');
   setupFormSubmitButton('general');
+  setupFormSubmitButton('designations');
   setupFormSubmitButton('other-approach');
 
 });

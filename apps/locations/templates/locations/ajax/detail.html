@@ -41,6 +41,20 @@
 
   <section class="card">
     <div class="card-header">
+      <a href="#collapse-designations" data-bs-toggle="collapse" class="card-title">{% translate 'Designations' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="designations">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-designations" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-designations">
+          {% include 'locations/includes/view/designations.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
       <a href="#collapse-other-approach" data-bs-toggle="collapse" class="card-title">{% translate 'Other info - approach' %}</a>
       <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="other-approach">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
     </div>

@@ -75,3 +75,42 @@ class LocationName(models.Model):
     class Meta:
         managed = False
         db_table = 'LOCATION_NAME'
+
+class SiteStatus(models.Model):
+    site_status_key = models.CharField(db_column='SITE_STATUS_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
+    short_name = models.CharField(db_column='SHORT_NAME', max_length=40)  # Field name made lowercase.
+    long_name = models.CharField(db_column='LONG_NAME', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    description = models.TextField(db_column='DESCRIPTION', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    entered_by = models.CharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')  # Field name made lowercase.
+    changed_by = models.CharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)  # Field name made lowercase.
+    system_supplied_data = models.BooleanField(db_column='SYSTEM_SUPPLIED_DATA')  # Field name made lowercase.
+    custodian = models.CharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'SITE_STATUS'
+
+    def __str__(self):
+        return self.short_name
+
+class LocationDesignation(models.Model):
+    designation_key = models.CharField(db_column='DESIGNATION_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
+    location_key = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY', related_name='designations')  # Field name made lowercase.
+    site_status_key = models.ForeignKey('SiteStatus', models.DO_NOTHING, db_column='SITE_STATUS_KEY')  # Field name made lowercase.
+    ref_code = models.CharField(db_column='REF_CODE', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    # authority = models.ForeignKey('Name', models.DO_NOTHING, db_column='AUTHORITY')  # Field name made lowercase.
+    date_from = models.DateTimeField(db_column='DATE_FROM', blank=True, null=True)  # Field name made lowercase.
+    date_to = models.DateTimeField(db_column='DATE_TO', blank=True, null=True)  # Field name made lowercase.
+    comment = models.TextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    entered_by = models.CharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')  # Field name made lowercase.
+    changed_by = models.CharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)  # Field name made lowercase.
+    system_supplied_data = models.BooleanField(db_column='SYSTEM_SUPPLIED_DATA')  # Field name made lowercase.
+    custodian = models.CharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'LOCATION_DESIGNATION'

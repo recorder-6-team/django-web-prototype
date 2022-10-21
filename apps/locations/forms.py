@@ -1,5 +1,5 @@
 from django import forms
-from .models import Location, LocationName
+from .models import Location, LocationName, LocationDesignation
 from django.utils.translation import gettext as _
 
 LocationNameFormSet = forms.inlineformset_factory(Location, LocationName, fields=('item_name','preferred',), extra=1)
@@ -25,6 +25,13 @@ class LocationUpdateGeneralForm(forms.ModelForm):
         }
       )
     }
+
+LocationDesignationFormSet = forms.inlineformset_factory(Location, LocationDesignation, fields=('site_status_key','ref_code','date_from','date_to','comment'), extra=1)
+
+class LocationUpdateDesignationsForm(forms.ModelForm):
+  class Meta:
+    model = Location
+    fields = [ ]
 
 class LocationUpdateOtherApproachForm(forms.ModelForm):
   class Meta:
