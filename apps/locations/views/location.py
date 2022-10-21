@@ -39,12 +39,12 @@ class LocationDetailView(DetailView):
     if self.__request_is_ajax():
       # Ajax request for details just renders a details block.
       return [
-        'locations/ajax/detail.html',
+        'locations/detail.html',
       ]
     else:
       # Non-ajax request for details renders a full-page.
       return [
-        'locations/detail.html',
+        'locations/detail-container.html',
       ]
 
   # Attach map assets for non-ajax locations detail view.

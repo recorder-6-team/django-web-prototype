@@ -1,22 +1,72 @@
-{# Full page details view for a location #}
-{# TODO remove if no longer needed, or consider keeping updated so can link to a location. #}
+{# Detail of a location to be loaded via AJAX into a div #}
 
-{% extends "glue/page.html" %}
 {% load recorder_filters %}
+{% load i18n %}
 {% load fontawesome_6 %}
 
-{% block title %}{{ object|preferred_name }}{% endblock %}
-
 {% block content %}
+<input type="hidden" id="map-lat" value="{{ object.lat }}"/>
+<input type="hidden" id="map-long" value="{{ object.long }}"/>
 
-<div class="row">
-  <div class="col-md-6">
-    {% include 'locations/includes/view/general.html' %}
-    <a href="{% url 'locations:update-general' object.location_key %}">{% fa6_icon 'github' 'fab' %}</a>
-  </div>
-  <div class="col-md-6">
-    <div id="map" class="map" style="height: 400px"></div>
-  </div>
-</div>
+<article class="data-details" id="accordion">
+  <input type="hidden" id="location-key" value="{{ object.location_key }}" />
+
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-names" data-bs-toggle="collapse" class="card-title">{% translate 'Names' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="names">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-names" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-names">
+          {% include 'locations/panels/names.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-general" data-bs-toggle="collapse" class="card-title">{% translate 'General' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="general">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-general" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-general">
+          {% include 'locations/panels/general.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-designations" data-bs-toggle="collapse" class="card-title">{% translate 'Designations' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="designations">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-designations" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-designations">
+          {% include 'locations/panels/designations.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-other-approach" data-bs-toggle="collapse" class="card-title">{% translate 'Other info - approach' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="other-approach">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-other-approach" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-other-approach">
+          {% include 'locations/panels/other-approach.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</article>
 
 {% endblock %}

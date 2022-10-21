@@ -1,0 +1,20 @@
+{# Full page details view for a location #}
+
+{% extends "glue/page.html" %}
+{% load recorder_filters %}
+{% load fontawesome_6 %}
+
+{% block title %}{{ object|preferred_name }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6">
+    {% include 'locations/detail.html' %}
+  </div>
+  <div class="col-md-6">
+    <div id="map" class="map" style="height: 400px"></div>
+  </div>
+</div>
+
+{% endblock %}
