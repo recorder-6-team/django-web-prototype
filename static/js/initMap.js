@@ -27,9 +27,18 @@ recorder.map = new ol.Map(olConfig);
 recorder.markerLayer = new ol.layer.Vector({
   source: new ol.source.Vector(),
   style: new ol.style.Style({
-    image: new ol.style.Icon({
-      anchor: [0.5, 1],
-      src: "{% static 'img/marker.png' %}"
+    text: new ol.style.Text({
+      offsetX: 0,
+      text: '\uf3c5',
+      font: '900 18px "Font Awesome 6 Free"', // font weight must be 900
+      fill: new ol.style.Fill({
+        color: 'red'
+      }),
+      stroke: new ol.style.Stroke({
+        color: 'blue',
+        lineCap: 'butt',
+        width: 4
+    }),
     })
   })
 });
