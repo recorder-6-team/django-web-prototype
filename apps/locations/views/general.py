@@ -5,7 +5,7 @@ from apps.locations.forms import LocationUpdateGeneralForm
 
 class LocationDetailGeneralView(DetailView):
   model = Location
-  template_name = 'locations/includes/view/general.html'
+  template_name = 'locations/panels/general.html'
 
 # View for the location general section update form.
 class LocationUpdateGeneralView(BaseUpdateView):

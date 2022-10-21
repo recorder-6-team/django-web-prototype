@@ -5,7 +5,7 @@ from apps.locations.forms import LocationUpdateOtherApproachForm
 
 class LocationDetailOtherApproachView(DetailView):
   model = Location
-  template_name = 'locations/includes/view/other-approach.html'
+  template_name = 'locations/panels/other-approach.html'
 
 class LocationUpdateOtherApproachView(BaseUpdateView):
   model = Location

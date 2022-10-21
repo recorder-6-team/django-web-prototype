@@ -11,7 +11,7 @@ from datetime import datetime
 
 class LocationDetailDesignationsView(DetailView):
   model = Location
-  template_name = 'locations/includes/view/designations.html'
+  template_name = 'locations/panels/designations.html'
 
 # Helper for managing the sublist of location designations.
 class LocationDesignationsFormHelper(FormHelper):
