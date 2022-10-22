@@ -50,7 +50,7 @@ class LocationUpdateDesignationsView(UpdateView):
         else:
           locationDesignation = locationDesignationForm.save(commit=False)
           # Skip rows that aren't filled in.
-          if locationDesignation.site_status_key != '':
+          if locationDesignation.site_status_key:
             if locationDesignation.designation_key == '':
               # Raw SQL call to populate the location designation key.
               with connection.cursor() as cursor:
