@@ -1,11 +1,12 @@
 {# Snippet to view location details - Names #}
 
+{% load i18n %}
 {% load recorder_filters %}
 
 <h3>{{ object|preferred_name }}</h3>
 
 {% if object|alternative_names %}
-  <h4>Alternative names</h4>
+  <h4>{% translate 'Alternative names' %}</h4>
   <ul>
   {% for name in object|alternative_names %}
     <li>{{ name.item_name }}</li>
