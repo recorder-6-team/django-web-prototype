@@ -1,9 +1,14 @@
 {# Snippet to view location details - Designations #}
 
+{% load i18n %}
 {% load recorder_filters %}
 
-<ul>
-{% for designation in object.designations.all %}
-  <li>{{ designation.site_status_key.short_name }}</li>
-{% endfor %}
-</ul>
+{% if object.designations.all %}
+  <ul>
+  {% for designation in object.designations.all %}
+    <li>{{ designation.site_status_key.short_name }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="alert alert-secondary">{% translate 'There are no administrative areas linked to this location.' %}</p>
+{% endif %}
