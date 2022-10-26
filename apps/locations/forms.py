@@ -26,7 +26,7 @@ class LocationUpdateGeneralForm(forms.ModelForm):
       )
     }
 
-LocationDesignationFormSet = forms.inlineformset_factory(Location, LocationDesignation, fields=('site_status_key','ref_code','date_from','date_to','comment'), extra=1)
+LocationDesignationFormSet = forms.inlineformset_factory(Location, LocationDesignation, fields=('site_status_key','ref_code','authority','date_from','date_to','comment'), extra=1)
 
 class LocationUpdateDesignationsForm(forms.ModelForm):
   class Meta:
