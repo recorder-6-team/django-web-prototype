@@ -21,6 +21,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     path('', include('apps.glue.urls')),
+    path('', include('apps.admin_areas.urls')),
+    path('', include('apps.sources.urls')),
     path('locations/', include('apps.locations.urls')),
     path('api/locations/', include('apps.locations.locations_api.urls')),
 
