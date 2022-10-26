@@ -19,12 +19,12 @@ class Name(models.Model):
     name_key = FixedCharField(db_column='NAME_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
     organisation = models.BooleanField(db_column='ORGANISATION')  # Field name made lowercase.
     comment = models.TextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    entered_by = models.CharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
     entry_date = models.DateTimeField(db_column='ENTRY_DATE')  # Field name made lowercase.
-    changed_by = models.CharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)  # Field name made lowercase.
     changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)  # Field name made lowercase.
     system_supplied_data = models.BooleanField(db_column='SYSTEM_SUPPLIED_DATA')  # Field name made lowercase.
-    custodian = models.CharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)  # Field name made lowercase.
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
