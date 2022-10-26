@@ -37,7 +37,7 @@ $(document).ready(function() {
   setupFormSubmitButton('names');
   setupFormSubmitButton('general');
   setupFormSubmitButton('designations');
-  setupFormSubmitButton('other-approach');
+  setupFormSubmitButton('other--approach');
 
   // Add button handler for nested forms.
   $(document).on('click', '.add-form-row', {}, function (e) {

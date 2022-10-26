@@ -35,9 +35,9 @@ class LocationUpdateDesignationsView(UpdateView):
   def get_context_data(self, **kwargs):
     context = super(LocationUpdateDesignationsView, self).get_context_data(**kwargs)
     if self.request.POST:
-        context['locationdesignations'] = LocationDesignationFormSet(self.request.POST, instance=self.object)
+        context['location__designations'] = LocationDesignationFormSet(self.request.POST, instance=self.object)
     else:
-        context['locationdesignations'] = LocationDesignationFormSet(instance=self.object)
+        context['location__designations'] = LocationDesignationFormSet(instance=self.object)
     context['designations_helper'] = LocationDesignationsFormHelper()
     return context
 

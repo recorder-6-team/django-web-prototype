@@ -35,9 +35,9 @@ class LocationUpdateNamesView(UpdateView):
   def get_context_data(self, **kwargs):
     context = super(LocationUpdateNamesView, self).get_context_data(**kwargs)
     if self.request.POST:
-        context['locationnames'] = LocationNameFormSet(self.request.POST, instance=self.object)
+        context['location__names'] = LocationNameFormSet(self.request.POST, instance=self.object)
     else:
-        context['locationnames'] = LocationNameFormSet(instance=self.object)
+        context['location__names'] = LocationNameFormSet(instance=self.object)
     context['names_helper'] = LocationNamesFormHelper()
     return context
 
