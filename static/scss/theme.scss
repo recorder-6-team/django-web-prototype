@@ -52,3 +52,29 @@ a.card-title {
   text-decoration: none;
   font-weight: bold;
 }
+/* For split.js container */
+.split-flex {
+  display: flex;
+  flex-direction: row;
+  > div {
+    padding: 0 8px;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+    &.gutter {
+      padding: 0;
+    }
+  }
+  .gutter {
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    &.gutter-horizontal {
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+      cursor: col-resize;
+    }
+  }
+}

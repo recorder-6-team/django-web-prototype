@@ -12,17 +12,18 @@ class LocationListView(TemplateView):
     context = super().get_context_data(**kwargs)
     context['externalJs'] = [
       'https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js',
-      'https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js',
+      'https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js',
+      'https://unpkg.com/split.js/dist/split.min.js',
     ]
     context['externalCss'] = [
       'https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css',
-      'https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css',
+      'https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css',
     ]
     context['internalJs'] = [
+      'locations/js/initMap.js',
       'locations/js/initTree.js',
       'locations/js/locationFormEditButtons.js',
       'locations/js/locationNamesForm.js',
-      'js/initMap.js',
     ]
     context['locationTypes'] = LocationType.objects.all()
     return context
@@ -47,18 +48,21 @@ class LocationDetailView(DetailView):
         'locations/detail-container.html',
       ]
 
-  # Attach map assets for non-ajax locations detail view.
+  # Attach map and other assets for non-ajax locations detail view.
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     if not self.__request_is_ajax():
       context['externalJs'] = [
-        'https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js',
+        'https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js',
+        'https://unpkg.com/split.js/dist/split.min.js',
       ]
       context['externalCss'] = [
-        'https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css',
+        'https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css',
       ]
       context['internalJs'] = [
-        'js/initMap.js',
+        'locations/js/initMap.js',
+        'locations/js/locationFormEditButtons.js',
+        'locations/js/locationNamesForm.js',
       ]
       context['recorderData'] = {
         'centreMap': {

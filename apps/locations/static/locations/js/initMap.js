@@ -2,6 +2,12 @@
 
 const olConfig = {
   target: 'map',
+  view: new ol.View({
+    center: [-12080385, 7567433],
+    zoom: 3,
+    maxZoom: 6,
+    minZoom: 2,
+  }),
   layers: [
     new ol.layer.Tile({
       source: new ol.source.OSM()
