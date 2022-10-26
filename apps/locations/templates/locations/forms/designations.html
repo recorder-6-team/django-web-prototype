@@ -12,7 +12,7 @@
     <legend>{% translate 'Designations' %}</legend>
     {{ locationdesignations.management_form }}
     {% crispy locationdesignations designations_helper %}
-    <button class="btn btn-secondary" type="button" id="location-add-designation" title="{% translate 'Add a designation' %}"><i class="fa-solid fa-plus"></i></button>
+    <button class="btn btn-secondary add-form-row" data-section="designations"  type="button" id="location-add-designation" title="{% translate 'Add a designation' %}"><i class="fa-solid fa-plus"></i></button>
   </fieldset>
   <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
 </form>

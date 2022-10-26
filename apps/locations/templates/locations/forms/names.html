@@ -12,7 +12,7 @@
     <legend>{% translate 'Names' %}</legend>
     {{ locationnames.management_form }}
     {% crispy locationnames names_helper %}
-    <button class="btn btn-secondary" type="button" id="location-add-name" title="{% translate 'Add a name' %}"><i class="fa-solid fa-plus"></i></button>
+    <button class="btn btn-secondary add-form-row" data-section="names" type="button" id="location-add-name" title="{% translate 'Add a name' %}"><i class="fa-solid fa-plus"></i></button>
   </fieldset>
   <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
 </form>

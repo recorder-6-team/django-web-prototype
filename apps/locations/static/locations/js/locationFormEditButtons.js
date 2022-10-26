@@ -39,4 +39,14 @@ $(document).ready(function() {
   setupFormSubmitButton('designations');
   setupFormSubmitButton('other-approach');
 
+  // Add button handler for nested forms.
+  $(document).on('click', '.add-form-row', {}, function (e) {
+    var section = $(e.currentTarget).data('section');
+    var formIdx = $('#id_' + section + '-TOTAL_FORMS').val();
+    $('#location-' + section + '_table tbody').append($('#location-' + section + '_table tbody tr.empty-form')[0].outerHTML
+      .replace(/__prefix__/g, formIdx)
+      .replace('d-none empty-form', 'mb-3'));
+      $('#id_' + section + '-TOTAL_FORMS').val(parseInt(formIdx) + 1);
+  });
+
 });
