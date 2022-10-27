@@ -12,11 +12,13 @@ class LocationListView(TemplateView):
     context = super().get_context_data(**kwargs)
     context['externalJs'] = [
       'https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/jstree.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js',
       'https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js',
       'https://unpkg.com/split.js/dist/split.min.js',
     ]
     context['externalCss'] = [
       'https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.8/themes/default/style.min.css',
+      'https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css',
       'https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css',
     ]
     context['internalJs'] = [
@@ -24,6 +26,8 @@ class LocationListView(TemplateView):
       'locations/js/initTree.js',
       'locations/js/locationFormEditButtons.js',
       'locations/js/locationNamesForm.js',
+      # Select2 preloaded, so works with AJAX forms.
+      'django_select2/django_select2.js',
     ]
     context['locationTypes'] = LocationType.objects.all()
     return context

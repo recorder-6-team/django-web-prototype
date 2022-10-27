@@ -34,6 +34,7 @@ CONTRIB_APPS = [
     'fontawesome_6',
     "rest_framework",
     'django_filters',
+    'django_select2'
 ]
 
 CUSTOM_APPS = [
@@ -164,5 +165,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 1000,
 }
+
+# Django Select2 assets will be included in the page template.
+SELECT2_JS = ''
+SELECT2_CSS = ''
 
 from recorder.local_settings import *

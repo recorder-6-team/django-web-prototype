@@ -25,5 +25,5 @@ urlpatterns = [
     path('', include('apps.sources.urls')),
     path('locations/', include('apps.locations.urls')),
     path('api/locations/', include('apps.locations.locations_api.urls')),
-
+    path("select2/", include("django_select2.urls")),
 ]
