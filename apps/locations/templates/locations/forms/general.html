@@ -9,7 +9,7 @@
 <form method="post" id="location-general-form">
   {% csrf_token %}
   {{ form | crispy }}
-  <input type="submit" value="Update">
+  <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
+  <input type="submit" class="btn btn-secondary" name="cancel" value="{% translate 'Cancel' %}">
 </form>
-
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.views.generic.edit import UpdateView
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
 
@@ -20,11 +21,15 @@ class BaseUpdateView(UpdateView):
   # POST form data handler.
   def post(self, request, *args, **kwargs):
     self.object = self.get_object()
-    thisForm = self.get_form()
-    if thisForm.is_valid():
-      return self.form_valid(thisForm)
+    if 'cancel' in request.POST:
+      url = self.get_success_url()
+      return HttpResponseRedirect(url)
     else:
-      return self.form_invalid(thisForm)
+      thisForm = self.get_form()
+      if thisForm.is_valid():
+        return self.form_valid(thisForm)
+      else:
+        return self.form_invalid(thisForm)
 
   # Change the URL on successful post to just return the general section, not
   # the whole location.
