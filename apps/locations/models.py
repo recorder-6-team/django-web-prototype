@@ -9,6 +9,7 @@ from django.db import models
 from apps.glue import FixedCharField
 from apps.glue import RtfTextField
 from apps.names.models import Name
+from apps.admin_areas.models import AdminArea
 
 class LocationType(models.Model):
     location_type_key = FixedCharField(db_column='LOCATION_TYPE_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
@@ -105,7 +106,7 @@ class LocationDesignation(models.Model):
     authority = models.ForeignKey(Name, models.DO_NOTHING, db_column='AUTHORITY')  # Field name made lowercase.
     date_from = models.DateTimeField(db_column='DATE_FROM', blank=True, null=True)  # Field name made lowercase.
     date_to = models.DateTimeField(db_column='DATE_TO', blank=True, null=True)  # Field name made lowercase.
-    comment = models.TextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    comment = RtfTextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
     entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
     entry_date = models.DateTimeField(db_column='ENTRY_DATE')  # Field name made lowercase.
     changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)  # Field name made lowercase.
@@ -116,3 +117,43 @@ class LocationDesignation(models.Model):
     class Meta:
         managed = False
         db_table = 'LOCATION_DESIGNATION'
+
+
+class LocationAdminAreas(models.Model):
+    location_admin_areas_key = FixedCharField(db_column='LOCATION_ADMIN_AREAS_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
+    admin_area_key = models.ForeignKey(AdminArea, models.DO_NOTHING, db_column='ADMIN_AREA_KEY')  # Field name made lowercase.
+    location_key = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY', related_name='location_admin_areas')  # Field name made lowercase.
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')  # Field name made lowercase.
+    system_supplied_data = models.BooleanField(db_column='SYSTEM_SUPPLIED_DATA')  # Field name made lowercase.
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'LOCATION_ADMIN_AREAS'
+
+
+class LocationBoundary(models.Model):
+    location_boundary_key = FixedCharField(db_column='LOCATION_BOUNDARY_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
+    location_key = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY')  # Field name made lowercase.
+    from_vague_date_start = models.IntegerField(db_column='FROM_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
+    from_vague_date_end = models.IntegerField(db_column='FROM_VAGUE_DATE_END', blank=True, null=True)  # Field name made lowercase.
+    from_vague_date_type = models.CharField(db_column='FROM_VAGUE_DATE_TYPE', max_length=2, blank=True, null=True)  # Field name made lowercase.
+    to_vague_date_start = models.IntegerField(db_column='TO_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
+    to_vague_date_end = models.IntegerField(db_column='TO_VAGUE_DATE_END', blank=True, null=True)  # Field name made lowercase.
+    to_vague_date_type = models.CharField(db_column='TO_VAGUE_DATE_TYPE', max_length=2, blank=True, null=True)  # Field name made lowercase.
+    version = models.SmallIntegerField(db_column='VERSION')  # Field name made lowercase.
+    map_sheet_key = FixedCharField(db_column='MAP_SHEET_KEY', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    object_id = models.CharField(db_column='OBJECT_ID', max_length=30, blank=True, null=True)  # Field name made lowercase.
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')  # Field name made lowercase.
+    changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)  # Field name made lowercase.
+    system_supplied_data = models.BooleanField(db_column='SYSTEM_SUPPLIED_DATA')  # Field name made lowercase.
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)  # Field name made lowercase.
+    external_filename = models.CharField(db_column='External_Filename', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    external_filename_keyfield = models.CharField(db_column='External_Filename_KeyField', max_length=50, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'LOCATION_BOUNDARY'

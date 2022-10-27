@@ -45,6 +45,7 @@ $(document).ready(function() {
   setupFormSubmitButton('names');
   setupFormSubmitButton('general');
   setupFormSubmitButton('designations');
+  setupFormSubmitButton('geo-info--admin-areas');
   setupFormSubmitButton('other--approach');
 
   // Add button handler for nested forms.

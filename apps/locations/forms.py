@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext as _
-from .models import Location, LocationName, LocationDesignation
+from .models import Location, LocationName, LocationDesignation, LocationAdminAreas
 from django_select2 import forms as s2forms
 
 LocationNameFormSet = forms.inlineformset_factory(Location, LocationName, fields=('item_name','preferred',), extra=1)
@@ -50,6 +50,37 @@ LocationDesignationFormSet = forms.inlineformset_factory(
   )
 
 class LocationUpdateDesignationsForm(forms.ModelForm):
+  class Meta:
+    model = Location
+    fields = [ ]
+
+
+##########################
+# Geo info - admin areas #
+##########################
+
+# Select2 lookup widget for admin areas.
+class AdminAreasWidget(s2forms.ModelSelect2Widget):
+    search_fields = [
+        "item_name__icontains",
+    ]
+
+# Formset factory for admin areas.
+LocationGeoInfoAdminAreaFormSet = forms.inlineformset_factory(
+  Location,
+  LocationAdminAreas,
+  fields = ('admin_area_key',),
+  widgets = {
+    'admin_area_key': AdminAreasWidget,
+  },
+  labels = {
+    'admin_area_key': _('Administrative areas'),
+  },
+  extra=1
+)
+
+# Form class for the list wrapper.
+class LocationUpdateGeoInfoAdminAreasForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]

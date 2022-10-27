@@ -1,0 +1,13 @@
+{# Snippet to view location details - Geo Info - Admin Areas #}
+
+{% load i18n %}
+{% load recorder_filters %}
+{% if object.location_admin_areas.all %}
+  <ul>
+  {% for location_admin_area in object.location_admin_areas.all %}
+    <li>{{ location_admin_area.admin_area_key }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="alert alert-secondary">{% translate 'There are no administrative areas linked to this location.' %}</p>
+{% endif %}

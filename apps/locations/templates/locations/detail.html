@@ -55,6 +55,20 @@
 
   <section class="card">
     <div class="card-header">
+      <a href="#collapse-geo-info--admin-areas" data-bs-toggle="collapse" class="card-title">{% translate 'Geo info - admin areas' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="geo-info--admin-areas">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-geo-info--admin-areas" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-geo-info--admin-areas">
+          {% include 'locations/panels/geo-info--admin-areas.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
       <a href="#collapse-other--approach" data-bs-toggle="collapse" class="card-title">{% translate 'Other info - approach' %}</a>
       <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="other--approach">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
     </div>
