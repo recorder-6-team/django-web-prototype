@@ -39,6 +39,9 @@ class AdminArea(models.Model):
         managed = False
         db_table = 'ADMIN_AREA'
 
+    def __str__(self):
+        return self.item_name
+
 
 class AdminAreaSources(models.Model):
     source_link_key = FixedCharField(db_column='SOURCE_LINK_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
