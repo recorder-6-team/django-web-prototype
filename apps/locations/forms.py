@@ -3,6 +3,10 @@ from django.utils.translation import gettext as _
 from .models import Location, LocationName, LocationDesignation, LocationAdminAreas
 from django_select2 import forms as s2forms
 
+#########
+# Names #
+#########
+
 LocationNameFormSet = forms.inlineformset_factory(Location, LocationName, fields=('item_name','preferred',), extra=1)
 
 class LocationUpdateNamesForm(forms.ModelForm):
@@ -10,6 +14,10 @@ class LocationUpdateNamesForm(forms.ModelForm):
     model = Location
     fields = [ ]
 
+
+###########
+# General #
+###########
 
 class LocationUpdateGeneralForm(forms.ModelForm):
   class Meta:
@@ -31,6 +39,10 @@ class LocationUpdateGeneralForm(forms.ModelForm):
       'location_type_key': _('Location type'),
     }
 
+
+################
+# Designations #
+################
 
 LocationDesignationFormSet = forms.inlineformset_factory(
     Location,
@@ -85,6 +97,10 @@ class LocationUpdateGeoInfoAdminAreasForm(forms.ModelForm):
     model = Location
     fields = [ ]
 
+
+####################
+# Other - approach #
+####################
 
 class LocationUpdateOtherApproachForm(forms.ModelForm):
   class Meta:
