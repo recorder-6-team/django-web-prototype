@@ -133,13 +133,13 @@ class LocationAdminAreas(models.Model):
         db_table = 'LOCATION_ADMIN_AREAS'
 
 
-class LocationBoundary(models.Model):
+class LocationBoundary(RecorderBaseModel):
     location_boundary_key = FixedCharField(db_column='LOCATION_BOUNDARY_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
     location_key = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY')  # Field name made lowercase.
-    from_vague_date_start = models.IntegerField(db_column='FROM_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
+    from_vague_date_start = VagueDateField(db_column='FROM_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
     from_vague_date_end = models.IntegerField(db_column='FROM_VAGUE_DATE_END', blank=True, null=True)  # Field name made lowercase.
     from_vague_date_type = models.CharField(db_column='FROM_VAGUE_DATE_TYPE', max_length=2, blank=True, null=True)  # Field name made lowercase.
-    to_vague_date_start = models.IntegerField(db_column='TO_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
+    to_vague_date_start = VagueDateField(db_column='TO_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
     to_vague_date_end = models.IntegerField(db_column='TO_VAGUE_DATE_END', blank=True, null=True)  # Field name made lowercase.
     to_vague_date_type = models.CharField(db_column='TO_VAGUE_DATE_TYPE', max_length=2, blank=True, null=True)  # Field name made lowercase.
     version = models.SmallIntegerField(db_column='VERSION')  # Field name made lowercase.
@@ -167,7 +167,7 @@ class LocationUse(RecorderBaseModel):
     from_vague_date_start = VagueDateField(db_column='FROM_VAGUE_DATE_START', max_length=50, blank=True, null=True)  # Field name made lowercase.
     from_vague_date_end = models.IntegerField(db_column='FROM_VAGUE_DATE_END', blank=True, null=True)  # Field name made lowercase.
     from_vague_date_type = models.CharField(db_column='FROM_VAGUE_DATE_TYPE', max_length=2, blank=True, null=True)  # Field name made lowercase.
-    to_vague_date_start = models.IntegerField(db_column='TO_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
+    to_vague_date_start = VagueDateField(db_column='TO_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
     to_vague_date_end = models.IntegerField(db_column='TO_VAGUE_DATE_END', blank=True, null=True)  # Field name made lowercase.
     to_vague_date_type = models.CharField(db_column='TO_VAGUE_DATE_TYPE', max_length=2, blank=True, null=True)  # Field name made lowercase.
     comment = models.TextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
