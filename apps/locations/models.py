@@ -6,8 +6,8 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-from apps.glue import FixedCharField
-from apps.glue import RtfTextField
+from apps.glue import FixedCharField, RtfTextField, VagueDateField
+from apps.glue.models import RecorderBaseModel
 from apps.names.models import Name
 from apps.admin_areas.models import AdminArea
 
@@ -157,3 +157,26 @@ class LocationBoundary(models.Model):
     class Meta:
         managed = False
         db_table = 'LOCATION_BOUNDARY'
+
+
+class LocationUse(RecorderBaseModel):
+    location_use_key = FixedCharField(db_column='LOCATION_USE_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
+    location_key = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY', related_name='uses')  # Field name made lowercase.
+    location_use = models.CharField(db_column='LOCATION_USE', max_length=30)  # Field name made lowercase.
+    potential = models.TextField(db_column='POTENTIAL', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    from_vague_date_start = VagueDateField(db_column='FROM_VAGUE_DATE_START', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    from_vague_date_end = models.IntegerField(db_column='FROM_VAGUE_DATE_END', blank=True, null=True)  # Field name made lowercase.
+    from_vague_date_type = models.CharField(db_column='FROM_VAGUE_DATE_TYPE', max_length=2, blank=True, null=True)  # Field name made lowercase.
+    to_vague_date_start = models.IntegerField(db_column='TO_VAGUE_DATE_START', blank=True, null=True)  # Field name made lowercase.
+    to_vague_date_end = models.IntegerField(db_column='TO_VAGUE_DATE_END', blank=True, null=True)  # Field name made lowercase.
+    to_vague_date_type = models.CharField(db_column='TO_VAGUE_DATE_TYPE', max_length=2, blank=True, null=True)  # Field name made lowercase.
+    comment = models.TextField(db_column='COMMENT', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')  # Field name made lowercase.
+    changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)  # Field name made lowercase.
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'LOCATION_USE'

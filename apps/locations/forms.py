@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext as _
-from .models import Location, LocationName, LocationDesignation, LocationAdminAreas
+from .models import Location, LocationName, LocationDesignation, LocationAdminAreas, LocationUse
 from django_select2 import forms as s2forms
 
 #########
@@ -93,6 +93,37 @@ LocationGeoInfoAdminAreaFormSet = forms.inlineformset_factory(
 
 # Form class for the list wrapper.
 class LocationUpdateGeoInfoAdminAreasForm(forms.ModelForm):
+  class Meta:
+    model = Location
+    fields = [ ]
+
+
+###############
+# Other - use #
+###############
+
+# Formset factory for admin areas.
+LocationOtherUseFormSet = forms.inlineformset_factory(
+  Location,
+  LocationUse,
+  fields = (
+    'location_use',
+    'potential',
+    'from_vague_date_start',
+    'to_vague_date_start',
+    'comment',
+  ),
+  labels = {
+    'location_use': _('Use'),
+    'from_vague_date_start': _('From'),
+    'to_vague_date_start': _('To'),
+    'comment': _('Comments'),
+  },
+  extra=1
+)
+
+# Form class for the list wrapper.
+class LocationUpdateOtherUseForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]

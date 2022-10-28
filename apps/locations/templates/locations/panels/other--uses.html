@@ -1,0 +1,13 @@
+{# Snippet to view location details - Other - uses #}
+
+{% load i18n %}
+{% load recorder_filters %}
+{% if object.uses.all %}
+  <ul>
+  {% for use in object.uses.all %}
+    <li>{{ use.location_use }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="alert alert-secondary">{% translate 'There are no uses linked to this location.' %}</p>
+{% endif %}

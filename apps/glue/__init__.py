@@ -14,3 +14,10 @@ class RtfTextField(models.TextField):
         if value != None:
           return rtf_to_text(value).strip()
         return value
+
+class VagueDateField(models.CharField):
+    description = 'A variant of CharField for vague date string input which maps to a database integer field and which should be used for vague_date_start fields.'
+
+    def db_type(self, connection):
+        return 'integer'
+

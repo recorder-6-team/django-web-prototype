@@ -13,7 +13,7 @@ class LocationDetailGeoInfoAdminAreasView(DetailView):
   model = Location
   template_name = 'locations/panels/geo-info--admin-areas.html'
 
-# Helper for managing the sublist of location designations.
+# Helper for managing the sublist of location uses.
 class LocationGeoInfoAdminAreasFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -54,7 +54,7 @@ class LocationUpdateGeoInfoAdminAreasView(UpdateView):
             if locationGeoInfoAdminArea.location_admin_areas_key == '':
               # Raw SQL call to populate the location admin area key.
               with connection.cursor() as cursor:
-                cursor.execute("SET nocount on; DECLARE @key CHAR(16); EXEC spNextKey 'location_designation', @key OUTPUT; SELECT @key;")
+                cursor.execute("SET nocount on; DECLARE @key CHAR(16); EXEC spNextKey 'location_admin_areas', @key OUTPUT; SELECT @key;")
                 row = cursor.fetchone()
                 locationGeoInfoAdminArea.location_admin_areas_key = row[0]
               locationGeoInfoAdminArea.entered_by = self.request.user.name_key_id
