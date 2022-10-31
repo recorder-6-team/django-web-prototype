@@ -69,6 +69,20 @@
 
   <section class="card">
     <div class="card-header">
+      <a href="#collapse-geo-info--land-parcels" data-bs-toggle="collapse" class="card-title">{% translate 'Geo info - land parcels' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="geo-info--land-parcels">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-geo-info--land-parcels" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-geo-info--land-parcels">
+          {% include 'locations/panels/geo-info--land-parcels.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
       <a href="#collapse-other--uses" data-bs-toggle="collapse" class="card-title">{% translate 'Other - uses' %}</a>
       <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="other--uses">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
     </div>

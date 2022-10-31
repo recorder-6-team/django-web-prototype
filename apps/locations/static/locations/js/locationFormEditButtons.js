@@ -46,6 +46,7 @@ $(document).ready(function() {
   setupFormSubmitButton('general');
   setupFormSubmitButton('designations');
   setupFormSubmitButton('geo-info--admin-areas');
+  setupFormSubmitButton('geo-info--land-parcels');
   setupFormSubmitButton('other--uses');
   setupFormSubmitButton('other--approach');
 

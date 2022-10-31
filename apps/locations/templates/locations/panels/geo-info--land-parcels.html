@@ -1,0 +1,13 @@
+{# Snippet to view location details - Geo Info - Land Parcels #}
+
+{% load i18n %}
+{% load recorder_filters %}
+{% if object.land_parcels.all %}
+  <ul>
+  {% for parcel in object.land_parcels.all %}
+    <li>{{ parcel.land_parcel_number }} | {{ parcel.land_parcel_map_sheet }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="alert alert-secondary">{% translate 'There are no land parcels linked to this location.' %}</p>
+{% endif %}

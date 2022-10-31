@@ -5,6 +5,7 @@ from .views import names
 from .views import general
 from .views import designations
 from .views import geo_info__admin_areas
+from .views import geo_info__land_parcels
 from .views import other__uses
 from .views import other__approach
 
@@ -20,6 +21,7 @@ urlpatterns = [
   path('<str:pk>/view/general', general.LocationDetailGeneralView.as_view(), name='view-general'),
   path('<str:pk>/view/designations', designations.LocationDetailDesignationsView.as_view(), name='view-designations'),
   path('<str:pk>/view/geo-info--admin-areas', geo_info__admin_areas.LocationDetailGeoInfoAdminAreasView.as_view(), name='view-geo-info--admin-areas'),
+  path('<str:pk>/view/geo-info--land-parcels', geo_info__land_parcels.LocationDetailGeoInfoLandParcelsView.as_view(), name='view-geo-info--land-parcels'),
   path('<str:pk>/view/other--uses', other__uses.LocationDetailOtherUsesView.as_view(), name='view-other--uses'),
   path('<str:pk>/view/other--approach', other__approach.LocationDetailOtherApproachView.as_view(), name='view-other--approach'),
   # Individual section forms, loaded via AJAX.
@@ -27,6 +29,7 @@ urlpatterns = [
   path('<str:pk>/update/general', general.LocationUpdateGeneralView.as_view(), name='update-general'),
   path('<str:pk>/update/designations', designations.LocationUpdateDesignationsView.as_view(), name='update-designations'),
   path('<str:pk>/update/geo-info--admin-areas', geo_info__admin_areas.LocationUpdateGeoInfoAdminAreasView.as_view(), name='update-geo-info--admin-areas'),
+  path('<str:pk>/update/geo-info--land-parcels', geo_info__land_parcels.LocationUpdateGeoInfoLandParcelsView.as_view(), name='update-geo-info--land-parcels'),
   path('<str:pk>/update/other--uses', other__uses.LocationUpdateOtherUsesView.as_view(), name='update-other--uses'),
   path('<str:pk>/update/other--approach', other__approach.LocationUpdateOtherApproachView.as_view(), name='update-other--approach'),
 ]
