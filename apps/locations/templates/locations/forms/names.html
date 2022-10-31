@@ -10,8 +10,8 @@
   {% csrf_token %}
   <fieldset>
     <legend>{% translate 'Names' %}</legend>
-    {{ location__names.management_form }}
-    {% crispy location__names names_helper %}
+    {{ formset_list.management_form }}
+    {% crispy formset_list formset_helper %}
   </fieldset>
   <button class="btn btn-success add-form-row" data-section="names" type="button" id="location-add-name" title="{% translate 'Add a name' %}"><i class="fa-solid fa-plus"></i></button>
   <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
