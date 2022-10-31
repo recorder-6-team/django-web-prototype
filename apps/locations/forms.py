@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext as _
 from .models import LandParcel
 from .models import Location
-from .models import LocationAdminAreas
+from .models import LocationAdminArea
 from .models import LocationDesignation
 from .models import LocationName
 from .models import LocationRelation
@@ -86,7 +86,7 @@ class AdminAreasWidget(s2forms.ModelSelect2Widget):
 # Formset factory for admin areas.
 LocationGeoInfoAdminAreasFormSet = forms.inlineformset_factory(
   Location,
-  LocationAdminAreas,
+  LocationAdminArea,
   fields = ('admin_area_key',),
   widgets = {
     'admin_area_key': AdminAreasWidget,
@@ -125,6 +125,33 @@ LocationGeoInfoLandParcelsFormSet = forms.inlineformset_factory(
 
 # Form class for the list wrapper.
 class LocationUpdateGeoInfoLandParcelsContainerForm(forms.ModelForm):
+  class Meta:
+    model = Location
+    fields = [ ]
+
+
+#####################
+# Other - relations #
+#####################
+
+# Formset factory for admin areas.
+LocationOtherRelationsFormSet = forms.inlineformset_factory(
+  Location,
+  LocationRelation,
+  fields = (
+    'location_key_2',
+    'relationship',
+  ),
+  labels = {
+    'location_2': _('Related location'),
+  },
+  fk_name = 'location_key_1',
+  extra=1
+
+)
+
+# Form class for the list wrapper.
+class LocationUpdateOtherRelationsContainerForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]

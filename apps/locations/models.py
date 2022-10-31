@@ -119,7 +119,7 @@ class LocationDesignation(models.Model):
         db_table = 'LOCATION_DESIGNATION'
 
 
-class LocationAdminAreas(models.Model):
+class LocationAdminArea(models.Model):
     location_admin_areas_key = FixedCharField(db_column='LOCATION_ADMIN_AREAS_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
     admin_area_key = models.ForeignKey(AdminArea, models.DO_NOTHING, db_column='ADMIN_AREA_KEY')  # Field name made lowercase.
     location_key = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY', related_name='location_admin_areas')  # Field name made lowercase.
@@ -157,6 +157,23 @@ class LocationBoundary(RecorderBaseModel):
     class Meta:
         managed = False
         db_table = 'LOCATION_BOUNDARY'
+
+
+class LocationRelation(models.Model):
+    location_relation_key = FixedCharField(db_column='LOCATION_RELATION_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
+    location_key_1 = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY_1', related_name='related_locations')  # Field name made lowercase.
+    location_key_2 = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY_2')  # Field name made lowercase.
+    relationship = models.CharField(db_column='RELATIONSHIP', max_length=50)  # Field name made lowercase.
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)  # Field name made lowercase.
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')  # Field name made lowercase.
+    changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)  # Field name made lowercase.
+    system_supplied_data = models.BooleanField(db_column='SYSTEM_SUPPLIED_DATA')  # Field name made lowercase.
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'LOCATION_RELATION'
 
 
 class LocationUse(RecorderBaseModel):

@@ -1,0 +1,13 @@
+{# Snippet to view location details - Other - relations #}
+
+{% load i18n %}
+{% load recorder_filters %}
+{% if object.related_locations.all %}
+  <ul>
+  {% for relation in object.related_locations.all %}
+    <li>{{ relation.location_key_2 }} | {{ relation.relationship }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="alert alert-secondary">{% translate 'There are no other locations related to this location.' %}</p>
+{% endif %}

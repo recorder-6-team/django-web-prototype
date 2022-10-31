@@ -83,6 +83,20 @@
 
   <section class="card">
     <div class="card-header">
+      <a href="#collapse-other--relations" data-bs-toggle="collapse" class="card-title">{% translate 'Other - relations' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="other--relations">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-other--relations" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="location-cntr-other--relations">
+          {% include 'locations/panels/other--relations.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
       <a href="#collapse-other--uses" data-bs-toggle="collapse" class="card-title">{% translate 'Other - uses' %}</a>
       <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="other--uses">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
     </div>

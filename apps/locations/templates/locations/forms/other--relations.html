@@ -1,0 +1,20 @@
+{# Other - relations section update form for a location #}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load recorder_filters %}
+
+{% block content %}
+
+<form method="post" id="location-other--relations-form">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate 'Other - relations' %}</legend>
+    {{ formset_list.management_form }}
+    {% crispy formset_list formset_helper %}
+  </fieldset>
+  <button class="btn btn-success add-form-row" data-section="other--relations" type="button" title="{% translate 'Add a relation' %}"><i class="fa-solid fa-plus"></i></button>
+  <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
+  <input type="submit" class="btn btn-secondary" name="cancel" value="{% translate 'Cancel' %}">
+</form>
+{% endblock %}
