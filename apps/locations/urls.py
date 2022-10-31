@@ -8,6 +8,7 @@ from .views import geo_info__admin_areas
 from .views import geo_info__land_parcels
 from .views import other__relations
 from .views import other__uses
+from .views import other__tenures
 from .views import other__approach
 
 app_name = 'locations'
@@ -25,6 +26,7 @@ urlpatterns = [
   path('<str:pk>/view/geo-info--land-parcels', geo_info__land_parcels.LocationDetailGeoInfoLandParcelsView.as_view(), name='view-geo-info--land-parcels'),
   path('<str:pk>/view/other--relations', other__relations.LocationDetailOtherRelationsView.as_view(), name='view-other--relations'),
   path('<str:pk>/view/other--uses', other__uses.LocationDetailOtherUsesView.as_view(), name='view-other--uses'),
+  path('<str:pk>/view/other--tenures', other__tenures.LocationDetailOtherTenuresView.as_view(), name='view-other--tenures'),
   path('<str:pk>/view/other--approach', other__approach.LocationDetailOtherApproachView.as_view(), name='view-other--approach'),
   # Individual section forms, loaded via AJAX.
   path('<str:pk>/update/names', names.LocationUpdateNamesView.as_view(), name='update-names'),
@@ -34,5 +36,6 @@ urlpatterns = [
   path('<str:pk>/update/geo-info--land-parcels', geo_info__land_parcels.LocationUpdateGeoInfoLandParcelsView.as_view(), name='update-geo-info--land-parcels'),
   path('<str:pk>/update/other--relations', other__relations.LocationUpdateOtherRelationsView.as_view(), name='update-other--relations'),
   path('<str:pk>/update/other--uses', other__uses.LocationUpdateOtherUsesView.as_view(), name='update-other--uses'),
+  path('<str:pk>/update/other--tenures', other__tenures.LocationUpdateOtherTenuresView.as_view(), name='update-other--tenures'),
   path('<str:pk>/update/other--approach', other__approach.LocationUpdateOtherApproachView.as_view(), name='update-other--approach'),
 ]

@@ -6,8 +6,21 @@ from .models import LocationAdminArea
 from .models import LocationDesignation
 from .models import LocationName
 from .models import LocationRelation
+from .models import Tenure
 from .models import LocationUse
 from django_select2 import forms as s2forms
+
+####################################
+# Re-usable Select2 search widgets #
+####################################
+
+class NamesWidget(s2forms.ModelSelect2Widget):
+    search_fields = [
+      'individual_fields__surname__icontains',
+      'individual_fields__forename__icontains',
+      'organisation_fields__full_name__icontains',
+      'organisation_fields__acronym__icontains'
+    ]
 
 #########
 # Names #
@@ -63,6 +76,9 @@ LocationDesignationsFormSet = forms.inlineformset_factory(
     ),
     labels = {
       'site_status_key': _('Site status'),
+    },
+    widgets = {
+      'authority': NamesWidget,
     },
     extra=1,
   )
@@ -183,6 +199,39 @@ LocationOtherUsesFormSet = forms.inlineformset_factory(
 
 # Form class for the list wrapper.
 class LocationUpdateOtherUsesContainerForm(forms.ModelForm):
+  class Meta:
+    model = Location
+    fields = [ ]
+
+
+##################
+# Other - tenure #
+##################
+
+# Formset factory for tenure.
+LocationOtherTenuresFormSet = forms.inlineformset_factory(
+  Location,
+  Tenure,
+  fields = (
+    'owned_by',
+    'tenure_type_key',
+    'from_vague_date_start',
+    'to_vague_date_start',
+  ),
+  labels = {
+    'owned_by': _('Owner'),
+    'from_vague_date_start': _('From'),
+    'to_vague_date_start': _('To'),
+    'tenure_type_key': _('Type'),
+  },
+  widgets = {
+    'owned_by': NamesWidget,
+  },
+  extra=1
+)
+
+# Form class for the list wrapper.
+class LocationUpdateOtherTenuresContainerForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]

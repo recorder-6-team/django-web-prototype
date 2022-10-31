@@ -12,7 +12,7 @@ $(document).ready(function() {
         // Add the form to the container.
         $('.location-cntr-' + section).html(data);
         // Initialise select2 controls.
-        $('.django-select2').not('[data-select2-id]').djangoSelect2({ width: '100%' });
+        $('tr:not(.empty-form) .django-select2:not([data-select2-id])').djangoSelect2({ width: '100%' });
         // Show the collapse container if not already visible.
         $('#collapse-' + section).show();
       }
@@ -49,20 +49,22 @@ $(document).ready(function() {
   setupFormSubmitButton('geo-info--land-parcels');
   setupFormSubmitButton('other--relations');
   setupFormSubmitButton('other--uses');
+  setupFormSubmitButton('other--tenures');
   setupFormSubmitButton('other--approach');
 
   // Add button handler for nested forms.
   $(document).on('click', '.add-form-row', {}, function (e) {
-    let section = $(e.currentTarget).data('section');
-    let formIdx = $('#id_' + section + '-TOTAL_FORMS').val();
+    const section = $(e.currentTarget).data('section');
+    const relation = $(e.currentTarget).data('relation');
+    const formIdx = $('#id_' + relation  + '-TOTAL_FORMS').val();
     // Copy the empty row form to a new row.
     $('#location-' + section + '_table tbody').append($('#location-' + section + '_table tbody tr.empty-form')[0].outerHTML
       .replace(/__prefix__/g, formIdx)
       .replace('d-none empty-form', 'mb-3'));
     // Increment the row counter.
-    $('#id_' + section + '-TOTAL_FORMS').val(parseInt(formIdx) + 1);
+    $('#id_' + relation + '-TOTAL_FORMS').val(parseInt(formIdx) + 1);
     // Initialise select2 controls.
-    $('.django-select2').not('[data-select2-id]').djangoSelect2({ width: '100%' });
+    $('tr:not(.empty-form) .django-select2:not([data-select2-id])').djangoSelect2({ width: '100%' });
   });
 
 });

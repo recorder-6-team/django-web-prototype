@@ -10,10 +10,9 @@
   {% csrf_token %}
   <fieldset>
     <legend>{% translate 'Designations' %}</legend>
-    {{ formset_list.management_form }}
     {% crispy formset_list formset_helper %}
   </fieldset>
-  <button class="btn btn-success add-form-row" data-section="designations"  type="button" title="{% translate 'Add a designation' %}"><i class="fa-solid fa-plus"></i></button>
+  <button class="btn btn-success add-form-row" data-section="designations" data-relation="designations" type="button" title="{% translate 'Add a designation' %}"><i class="fa-solid fa-plus"></i></button>
   <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
   <input type="submit" class="btn btn-secondary" name="cancel" value="{% translate 'Cancel' %}">
 </form>

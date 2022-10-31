@@ -1,4 +1,4 @@
-{# Other - uses section update form for a location #}
+{# Other - tenures section update form for a location #}
 
 {% load crispy_forms_tags %}
 {% load i18n %}
@@ -6,13 +6,13 @@
 
 {% block content %}
 
-<form method="post" id="location-other--uses-form">
+<form method="post" id="location-other--tenures-form">
   {% csrf_token %}
   <fieldset>
-    <legend>{% translate 'Other - uses' %}</legend>
+    <legend>{% translate 'Other - tenures' %}</legend>
     {% crispy formset_list formset_helper %}
   </fieldset>
-  <button class="btn btn-success add-form-row" data-section="other--uses" data-relation="uses" type="button" title="{% translate 'Add a use' %}"><i class="fa-solid fa-plus"></i></button>
+  <button class="btn btn-success add-form-row" data-section="other--tenures" data-relation="tenures" type="button" title="{% translate 'Add a use' %}"><i class="fa-solid fa-plus"></i></button>
   <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
   <input type="submit" class="btn btn-secondary" name="cancel" value="{% translate 'Cancel' %}">
 </form>

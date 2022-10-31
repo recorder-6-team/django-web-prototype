@@ -1,9 +1,21 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Location, LocationAdminArea, LocationName, LocationType
+from .models import Location
+from .models import LocationAdminArea
+from .models import LocationName
+from .models import LocationType
+from .models import TenureType
 
 @admin.register(LocationType)
+class LocationTypeAdmin(admin.ModelAdmin):
+    list_display = (
+      'short_name',
+      'long_name',
+      'description',
+    )
+
+@admin.register(TenureType)
 class LocationTypeAdmin(admin.ModelAdmin):
     list_display = (
       'short_name',

@@ -2,10 +2,10 @@
 
 {% load i18n %}
 {% load recorder_filters %}
-{% if object.location_admin_areas.all %}
+{% if object.admin_areas.all %}
   <ul>
-  {% for location_admin_area in object.location_admin_areas.all %}
-    <li>{{ location_admin_area.admin_area_key }}</li>
+  {% for admin_area in object.admin_areas.all %}
+    <li>{{ admin_area.admin_area_key }}</li>
   {% endfor %}
   </ul>
 {% else %}
