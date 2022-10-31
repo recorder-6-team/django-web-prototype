@@ -55,8 +55,6 @@ class RecorderBaseModel(models.Model):
                   else:
                     date_regex = re.compile('^(\d{2})/(\d{2})/(\d{4})$')
                     matches = date_regex.search(date_string)
-                    print('matches')
-                    print (matches)
                     if matches:
                       print (matches.group(1))
                       date = datetime.datetime.fromisoformat(matches.group(3) + '-' + matches.group(2) + '-' + matches.group(1))

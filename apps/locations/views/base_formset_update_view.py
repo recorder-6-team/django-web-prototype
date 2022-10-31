@@ -30,7 +30,6 @@ class BaseFormsetUpdateView(UpdateView):
   def form_valid(self, form):
     context = self.get_context_data()
     formset_list = context['formset_list']
-    print(form.cleaned_data)
     if formset_list.is_valid():
       for this_form in formset_list:
         # Check if delete checkbox ticked.

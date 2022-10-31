@@ -1442,7 +1442,7 @@ class Location(models.Model):
         db_table = 'LOCATION'
 
 
-class LocationAdminAreas(models.Model):
+class LocationAdminArea(models.Model):
     location_admin_areas_key = FixedCharField(db_column='LOCATION_ADMIN_AREAS_KEY', primary_key=True, max_length=16)  # Field name made lowercase.
     admin_area_key = models.ForeignKey(AdminArea, models.DO_NOTHING, db_column='ADMIN_AREA_KEY')  # Field name made lowercase.
     location_key = models.ForeignKey(Location, models.DO_NOTHING, db_column='LOCATION_KEY')  # Field name made lowercase.
