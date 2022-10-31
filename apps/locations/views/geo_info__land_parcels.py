@@ -1,8 +1,8 @@
 from django.views.generic.detail import DetailView
 from .base_formset_update_view import BaseFormsetUpdateView
 from apps.locations.models import Location
-from apps.locations.forms import LocationUpdateGeoInfoLandParcelsForm
-from apps.locations.forms import LocationGeoInfoLandParcelFormSet
+from apps.locations.forms import LocationUpdateGeoInfoLandParcelsContainerForm
+from apps.locations.forms import LocationGeoInfoLandParcelsFormSet
 from crispy_forms.helper import FormHelper
 
 class LocationDetailGeoInfoLandParcelsView(DetailView):
@@ -22,7 +22,7 @@ class LocationGeoInfoLandParcelsFormHelper(FormHelper):
 
 class LocationUpdateGeoInfoLandParcelsView(BaseFormsetUpdateView):
   model = Location
-  form_class = LocationUpdateGeoInfoLandParcelsForm
+  form_class = LocationUpdateGeoInfoLandParcelsContainerForm
   template_name = 'locations/forms/geo-info--land-parcels.html'
   section_name = 'geo-info--land-parcels'
   table_name = 'land_parcel'
@@ -32,8 +32,8 @@ class LocationUpdateGeoInfoLandParcelsView(BaseFormsetUpdateView):
   def get_context_data(self, **kwargs):
     context = super(LocationUpdateGeoInfoLandParcelsView, self).get_context_data(**kwargs)
     if self.request.POST:
-        context['formset_list'] = LocationGeoInfoLandParcelFormSet(self.request.POST, instance=self.object)
+        context['formset_list'] = LocationGeoInfoLandParcelsFormSet(self.request.POST, instance=self.object)
     else:
-        context['formset_list'] = LocationGeoInfoLandParcelFormSet(instance=self.object)
+        context['formset_list'] = LocationGeoInfoLandParcelsFormSet(instance=self.object)
     context['formset_helper'] = LocationGeoInfoLandParcelsFormHelper()
     return context

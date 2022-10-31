@@ -1,8 +1,8 @@
 from django.views.generic.detail import DetailView
 from .base_formset_update_view import BaseFormsetUpdateView
 from apps.locations.models import Location
-from apps.locations.forms import LocationUpdateDesignationsForm
-from apps.locations.forms import LocationDesignationFormSet
+from apps.locations.forms import LocationUpdateDesignationsContainerForm
+from apps.locations.forms import LocationDesignationsFormSet
 from crispy_forms.helper import FormHelper
 
 class LocationDetailDesignationsView(DetailView):
@@ -22,7 +22,7 @@ class LocationDesignationsFormHelper(FormHelper):
 
 class LocationUpdateDesignationsView(BaseFormsetUpdateView):
   model = Location
-  form_class = LocationUpdateDesignationsForm
+  form_class = LocationUpdateDesignationsContainerForm
   template_name = 'locations/forms/designations.html'
   section_name = 'designations'
   table_name = 'location_designation'
@@ -31,8 +31,8 @@ class LocationUpdateDesignationsView(BaseFormsetUpdateView):
   def get_context_data(self, **kwargs):
     context = super(LocationUpdateDesignationsView, self).get_context_data(**kwargs)
     if self.request.POST:
-        context['formset_list'] = LocationDesignationFormSet(self.request.POST, instance=self.object)
+        context['formset_list'] = LocationDesignationsFormSet(self.request.POST, instance=self.object)
     else:
-        context['formset_list'] = LocationDesignationFormSet(instance=self.object)
+        context['formset_list'] = LocationDesignationsFormSet(instance=self.object)
     context['formset_helper'] = LocationDesignationsFormHelper()
     return context

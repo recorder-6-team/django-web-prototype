@@ -1,8 +1,8 @@
 from django.views.generic.detail import DetailView
 from .base_formset_update_view import BaseFormsetUpdateView
 from apps.locations.models import Location
-from apps.locations.forms import LocationUpdateNamesForm
-from apps.locations.forms import LocationNameFormSet
+from apps.locations.forms import LocationUpdateNamesContainerForm
+from apps.locations.forms import LocationNamesFormSet
 from crispy_forms.helper import FormHelper
 from datetime import datetime
 
@@ -23,7 +23,7 @@ class LocationNamesFormHelper(FormHelper):
 
 class LocationUpdateNamesView(BaseFormsetUpdateView):
   model = Location
-  form_class = LocationUpdateNamesForm
+  form_class = LocationUpdateNamesContainerForm
   template_name = 'locations/forms/names.html'
   section_name = 'names'
   table_name = 'location_name'
@@ -33,8 +33,8 @@ class LocationUpdateNamesView(BaseFormsetUpdateView):
   def get_context_data(self, **kwargs):
     context = super(LocationUpdateNamesView, self).get_context_data(**kwargs)
     if self.request.POST:
-        context['formset_list'] = LocationNameFormSet(self.request.POST, instance=self.object)
+        context['formset_list'] = LocationNamesFormSet(self.request.POST, instance=self.object)
     else:
-        context['formset_list'] = LocationNameFormSet(instance=self.object)
+        context['formset_list'] = LocationNamesFormSet(instance=self.object)
     context['formset_helper'] = LocationNamesFormHelper()
     return context

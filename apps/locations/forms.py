@@ -1,15 +1,21 @@
 from django import forms
 from django.utils.translation import gettext as _
-from .models import Location, LocationName, LocationDesignation, LocationAdminAreas, LocationUse, LandParcel
+from .models import LandParcel
+from .models import Location
+from .models import LocationAdminAreas
+from .models import LocationDesignation
+from .models import LocationName
+from .models import LocationRelation
+from .models import LocationUse
 from django_select2 import forms as s2forms
 
 #########
 # Names #
 #########
 
-LocationNameFormSet = forms.inlineformset_factory(Location, LocationName, fields=('item_name','preferred',), extra=1)
+LocationNamesFormSet = forms.inlineformset_factory(Location, LocationName, fields=('item_name','preferred',), extra=1)
 
-class LocationUpdateNamesForm(forms.ModelForm):
+class LocationUpdateNamesContainerForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]
@@ -44,7 +50,7 @@ class LocationUpdateGeneralForm(forms.ModelForm):
 # Designations #
 ################
 
-LocationDesignationFormSet = forms.inlineformset_factory(
+LocationDesignationsFormSet = forms.inlineformset_factory(
     Location,
     LocationDesignation,
     fields=(
@@ -61,7 +67,7 @@ LocationDesignationFormSet = forms.inlineformset_factory(
     extra=1,
   )
 
-class LocationUpdateDesignationsForm(forms.ModelForm):
+class LocationUpdateDesignationsContainerForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]
@@ -78,7 +84,7 @@ class AdminAreasWidget(s2forms.ModelSelect2Widget):
     ]
 
 # Formset factory for admin areas.
-LocationGeoInfoAdminAreaFormSet = forms.inlineformset_factory(
+LocationGeoInfoAdminAreasFormSet = forms.inlineformset_factory(
   Location,
   LocationAdminAreas,
   fields = ('admin_area_key',),
@@ -92,7 +98,7 @@ LocationGeoInfoAdminAreaFormSet = forms.inlineformset_factory(
 )
 
 # Form class for the list wrapper.
-class LocationUpdateGeoInfoAdminAreasForm(forms.ModelForm):
+class LocationUpdateGeoInfoAdminAreasContainerForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]
@@ -103,7 +109,7 @@ class LocationUpdateGeoInfoAdminAreasForm(forms.ModelForm):
 ###########################
 
 # Formset factory for land parcels.
-LocationGeoInfoLandParcelFormSet = forms.inlineformset_factory(
+LocationGeoInfoLandParcelsFormSet = forms.inlineformset_factory(
   Location,
   LandParcel,
   fields = (
@@ -118,18 +124,18 @@ LocationGeoInfoLandParcelFormSet = forms.inlineformset_factory(
 )
 
 # Form class for the list wrapper.
-class LocationUpdateGeoInfoLandParcelsForm(forms.ModelForm):
+class LocationUpdateGeoInfoLandParcelsContainerForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]
 
 
-###############
-# Other - use #
-###############
+################
+# Other - uses #
+################
 
 # Formset factory for admin areas.
-LocationOtherUseFormSet = forms.inlineformset_factory(
+LocationOtherUsesFormSet = forms.inlineformset_factory(
   Location,
   LocationUse,
   fields = (
@@ -149,7 +155,7 @@ LocationOtherUseFormSet = forms.inlineformset_factory(
 )
 
 # Form class for the list wrapper.
-class LocationUpdateOtherUseForm(forms.ModelForm):
+class LocationUpdateOtherUsesContainerForm(forms.ModelForm):
   class Meta:
     model = Location
     fields = [ ]
