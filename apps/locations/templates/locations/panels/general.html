@@ -6,18 +6,18 @@
   <p>{{ object.description | newlinetohtml | safe }}</p>
 {% endif %}
 <dl class="row">
-  <dt class="col-sm-3">Key</dt>
+  <dt class="col-sm-3">{% translate 'Key' %}</dt>
   <dd class="col-sm-9">{{ object.location_key }}</dd>
   {% if object.location_type_key %}
-    <dt class="col-sm-3">Type</dt>
+    <dt class="col-sm-3">{% translate 'Type' %}</dt>
     <dd class="col-sm-9">{{ object.location_type_key.short_name }}</dd>
   {% endif %}
   {% if object.spatial_ref %}
-    <dt class="col-sm-3">Spatial reference</dt>
+    <dt class="col-sm-3">{% translate 'Spatial reference' %}</dt>
     <dd class="col-sm-9">{{ object.spatial_ref }} ({{ object.spatial_ref_system }} | {{ object.spatial_ref_qualifier }})</dd>
   {% endif %}
   {% if object.file_code %}
-    <dt class="col-sm-3">File code</dt>
+    <dt class="col-sm-3">{% translate 'File code' %}</dt>
     <dd class="col-sm-9">{{ object.file_code }}</dd>
   {% endif %}
 </dl>
