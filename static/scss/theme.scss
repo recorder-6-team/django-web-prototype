@@ -77,4 +77,14 @@ a.card-title {
       cursor: col-resize;
     }
   }
+  #detail-pane {
+    width: 100%;
+  }
+}
+/* Map needs initial dimensions. */
+#map {
+  height: 400px;
+}
+.item-details-page #map {
+  height: 100%
 }

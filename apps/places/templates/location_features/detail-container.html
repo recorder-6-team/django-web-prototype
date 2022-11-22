@@ -1,0 +1,22 @@
+{# Full page details view for a location feature #}
+
+{% extends "glue/page.html" %}
+{% load recorder_filters %}
+{% load fontawesome_6 %}
+
+{% block title %}{{ object.item_name }}{% endblock %}
+
+{% block content %}
+
+<div class="split-flex item-details-page">
+  <div id="browser-pane">
+    <div class="mb-3">
+      {% include 'location_features/detail.html' %}
+    </div>
+  </div>
+  <div id="detail-pane">
+    <div id="map"></div>
+  </div>
+</div>
+
+{% endblock %}

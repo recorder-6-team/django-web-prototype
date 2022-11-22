@@ -1,0 +1,21 @@
+{# Snippet to view location feature details - General #}
+
+{% load i18n %}
+{% load recorder_filters %}
+
+<h3>{{ object.item_name }}</h3>
+
+{% if object.comment %}
+  <p>{{ object.comment | newlinetohtml | safe }}</p>
+{% endif %}
+{% if object.date_from and object.date_to %}
+  <p>{% blocktranslate with from=object.date_from to=object.date_to %}From {{ from }} to {{ to }}{% endblocktranslate %}</p>
+{% elif object.date_from %}
+  <p>{% blocktranslate with from=object.date_from %}From {{ from }}{% endblocktranslate %}</p>
+{% elif object.date_to %}
+  <p>{% blocktranslate with to=object.date_to %}To {{ to }}{% endblocktranslate %}</p>
+{% endif %}
+<dl class="row">
+  <dt class="col-sm-3">{% translate 'Key' %}</dt>
+  <dd class="col-sm-9">{{ object.location_feature_key }}</dd>
+</dl>

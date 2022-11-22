@@ -40,8 +40,8 @@ CONTRIB_APPS = [
 CUSTOM_APPS = [
     'apps.glue',
     'apps.admin_areas',
-    'apps.locations',
-    'apps.locations.locations_api',
+    'apps.places',
+    'apps.places.places_api',
     'apps.names',
     'apps.sources',
     'apps.userlogin',

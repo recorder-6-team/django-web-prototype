@@ -1,0 +1,19 @@
+{# Other - tenures section update form for a location #}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load recorder_filters %}
+
+{% block content %}
+
+<form method="post" class="section-form" data-section="other--tenures">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate 'Other - tenures' %}</legend>
+    {% crispy formset_list formset_helper %}
+  </fieldset>
+  <button class="btn btn-success add-form-row" data-section="other--tenures" data-relation="tenures" type="button" title="{% translate 'Add a use' %}"><i class="fa-solid fa-plus"></i></button>
+  <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
+  <input type="submit" class="btn btn-secondary" name="cancel" value="{% translate 'Cancel' %}">
+</form>
+{% endblock %}

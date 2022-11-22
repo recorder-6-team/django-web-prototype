@@ -1,0 +1,21 @@
+{# Names section update form for a location #}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load recorder_filters %}
+
+{% block content %}
+
+<form method="post" class="section-form" data-section="names">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate 'Names' %}</legend>
+    {{ formset_list.management_form }}
+    {% crispy formset_list formset_helper %}
+  </fieldset>
+  <button class="btn btn-success add-form-row" data-section="names" data-relation="names" type="button" id="location-add-name" title="{% translate 'Add a name' %}"><i class="fa-solid fa-plus"></i></button>
+  <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
+  <input type="submit" class="btn btn-secondary" name="cancel" value="{% translate 'Cancel' %}">
+</form>
+
+{% endblock %}

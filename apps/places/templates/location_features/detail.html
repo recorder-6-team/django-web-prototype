@@ -1,0 +1,29 @@
+{# Detail of a location feature to be loaded via AJAX into a div #}
+
+{% load recorder_filters %}
+{% load i18n %}
+{% load fontawesome_6 %}
+
+{% block content %}
+<input type="hidden" id="map-lat" value="{{ object.location_key.lat }}"/>
+<input type="hidden" id="map-long" value="{{ object.location_key.long }}"/>
+
+<article class="data-details" id="accordion" data-item-key="{{ object.location_feature_key }}" data-entity="location_feature">
+
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-general" data-bs-toggle="collapse" class="card-title">{% translate 'General' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="general">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-general" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="panel-cntr-general">
+          {% include 'location_features/panels/general.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</article>
+
+{% endblock %}
