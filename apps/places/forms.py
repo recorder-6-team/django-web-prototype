@@ -11,6 +11,7 @@ from .models import LocationUse
 from .models import LocationFeature
 from .models import LocationFeatureGrading
 from .models import LocationFeatureType
+from .models import ManagementAim
 from .models import DamageOccurrence
 from .models import PotentialThreat
 from django_select2 import forms as s2forms
@@ -301,6 +302,31 @@ class LocationFeatureUpdateGeneralForm(forms.ModelForm):
     if not grading.location_feature_type_key.short_name in gradings:
       gradings[grading.location_feature_type_key.location_feature_type_key] = {}
     gradings[grading.location_feature_type_key.location_feature_type_key][grading.feature_grading_key] = grading.short_name
+
+
+###################
+# Management aims #
+###################
+
+# Formset factory for management aims.
+LocationFeatureManagementAimsFormSet = forms.inlineformset_factory(
+  LocationFeature,
+  ManagementAim,
+  fields = (
+    'item_name',
+    'description',
+    'authority',
+    'next_appraisal_date',
+    'agreement_date',
+  ),
+  extra=1
+)
+
+# Form class for the list wrapper.
+class LocationFeatureUpdateManagementAimsContainerForm(forms.ModelForm):
+  class Meta:
+    model = LocationFeature
+    fields = [ ]
 
 
 ######################

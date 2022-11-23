@@ -182,6 +182,29 @@ class PotentialThreat(models.Model):
         managed = False
         db_table = 'POTENTIAL_THREAT'
 
+    def __str__(self):
+        return self.threat
+
+class ManagementAim(models.Model):
+    management_aim_key = FixedCharField(db_column='MANAGEMENT_AIM_KEY', primary_key=True, max_length=16)
+    location_feature_key = models.ForeignKey(LocationFeature, models.DO_NOTHING, db_column='LOCATION_FEATURE_KEY', related_name='management_aims')
+    item_name = models.CharField(db_column='ITEM_NAME', max_length=50)
+    description = models.TextField(db_column='DESCRIPTION', blank=True, null=True)
+    authority = models.ForeignKey(Name, models.DO_NOTHING, db_column='AUTHORITY')
+    next_appraisal_date = models.CharField(db_column='NEXT_APPRAISAL_DATE', max_length=50, blank=True, null=True)
+    agreement_date = models.DateTimeField(db_column='AGREEMENT_DATE')
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')
+    changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'MANAGEMENT_AIM'
+
+    def __str__(self):
+        return self.item_name
 
 class LocationName(models.Model):
     location_name_key = FixedCharField(db_column='LOCATION_NAME_KEY', primary_key=True, max_length=16)

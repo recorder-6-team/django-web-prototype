@@ -26,6 +26,20 @@
 
   <section class="card">
     <div class="card-header">
+      <a href="#collapse-management-aims" data-bs-toggle="collapse" class="card-title">{% translate 'Management aims' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="management-aims">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-management-aims" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="panel-cntr-management-aims">
+          {% include 'location_features/panels/management-aims.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
       <a href="#collapse-potential-threats" data-bs-toggle="collapse" class="card-title">{% translate 'Potential threats' %}</a>
       <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="potential-threats">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
     </div>

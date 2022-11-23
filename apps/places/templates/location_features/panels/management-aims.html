@@ -1,0 +1,13 @@
+{# Snippet to view location feature - management aims #}
+
+{% load i18n %}
+{% load recorder_filters %}
+{% if object.management_aims.all %}
+  <ul>
+  {% for aim in object.management_aims.all %}
+    <li>{{ aim.item_name}}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="alert alert-secondary">{% translate 'There are no management aims linked to this feature.' %}</p>
+{% endif %}
