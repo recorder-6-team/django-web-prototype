@@ -64,4 +64,4 @@ class BaseFormsetUpdateView(UpdateView):
   # Change the URL on successful post to just return the general section, not
   # the whole location.
   def get_success_url(self):
-    return reverse("places:view--" + self.model._meta.db_table.lower().replace('_', '-')  + "--" + self.section_name, kwargs={"pk": self.object.location_key})
+    return reverse("places:view--" + self.model._meta.db_table.lower().replace('_', '-')  + "--" + self.section_name, kwargs={"pk": self.object.pk})
