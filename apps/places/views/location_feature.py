@@ -44,4 +44,3 @@ class LocationFeatureDetailView(DetailView):
         }
       }
     return context
-

@@ -8,14 +8,31 @@
 {% if object.comment %}
   <p>{{ object.comment | newlinetohtml | safe }}</p>
 {% endif %}
-{% if object.date_from and object.date_to %}
-  <p>{% blocktranslate with from=object.date_from to=object.date_to %}From {{ from }} to {{ to }}{% endblocktranslate %}</p>
-{% elif object.date_from %}
-  <p>{% blocktranslate with from=object.date_from %}From {{ from }}{% endblocktranslate %}</p>
-{% elif object.date_to %}
-  <p>{% blocktranslate with to=object.date_to %}To {{ to }}{% endblocktranslate %}</p>
-{% endif %}
 <dl class="row">
   <dt class="col-sm-3">{% translate 'Key' %}</dt>
   <dd class="col-sm-9">{{ object.location_feature_key }}</dd>
 </dl>
+{% if object.feature_grading_key %}
+  <dl class="row">
+    <dt class="col-sm-3">{% translate 'Feature type' %}</dt>
+    <dd class="col-sm-9">{{ object.feature_grading_key.location_feature_type_key.short_name }}</dd>
+  </dl>
+  <dl class="row">
+    <dt class="col-sm-3">{% translate 'Feature grading' %}</dt>
+    <dd class="col-sm-9">{{ object.feature_grading_key.short_name }}</dd>
+  </dl>
+{% endif %}
+{% if object.date_from or object.date_to %}
+  <dl class="row">
+    <dt class="col-sm-3">{% translate 'Date' %}</dt>
+    <dd class="col-sm-9">
+      {% if object.date_from and object.date_to %}
+        <p>{% blocktranslate with from=object.date_from to=object.date_to %}From {{ from }} to {{ to }}{% endblocktranslate %}</p>
+      {% elif object.date_from %}
+        <p>{% blocktranslate with from=object.date_from %}From {{ from }}{% endblocktranslate %}</p>
+      {% elif object.date_to %}
+        <p>{% blocktranslate with to=object.date_to %}To {{ to }}{% endblocktranslate %}</p>
+      {% endif %}
+    </dd>
+  </dl>
+{% endif %}
