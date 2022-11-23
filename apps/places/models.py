@@ -146,6 +146,43 @@ class DamageOccurrence(models.Model):
         db_table = 'DAMAGE_OCCURRENCE'
 
 
+class ThreatType(models.Model):
+    threat_type_key = FixedCharField(db_column='THREAT_TYPE_KEY', primary_key=True, max_length=16)
+    short_name = models.CharField(db_column='SHORT_NAME', max_length=20)
+    long_name = models.CharField(db_column='LONG_NAME', max_length=100, blank=True, null=True)
+    description = models.TextField(db_column='DESCRIPTION', blank=True, null=True)
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')
+    changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)
+    system_supplied_data = models.BooleanField(db_column='SYSTEM_SUPPLIED_DATA')
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'THREAT_TYPE'
+
+    def __str__(self):
+        return self.short_name
+
+
+class PotentialThreat(models.Model):
+    potential_threat_key = FixedCharField(db_column='POTENTIAL_THREAT_KEY', primary_key=True, max_length=16)
+    comment = models.TextField(db_column='COMMENT', blank=True, null=True)
+    threat = models.CharField(db_column='THREAT', max_length=60)
+    threat_type_key = models.ForeignKey('ThreatType', models.DO_NOTHING, db_column='THREAT_TYPE_KEY')
+    location_feature_key = models.ForeignKey(LocationFeature, models.DO_NOTHING, db_column='LOCATION_FEATURE_KEY', related_name='potential_threats')
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')
+    changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'POTENTIAL_THREAT'
+
+
 class LocationName(models.Model):
     location_name_key = FixedCharField(db_column='LOCATION_NAME_KEY', primary_key=True, max_length=16)
     item_name = models.CharField(db_column='ITEM_NAME', max_length=100)

@@ -12,6 +12,7 @@ from .views import location__other__tenures
 from .views import location__other__approach
 from .views import location_feature
 from .views import location_feature__general
+from .views import location_feature__potential_threats
 from .views import location_feature__damage_occurrences
 
 app_name = 'places'
@@ -48,8 +49,10 @@ urlpatterns = [
   path('location-feature/<str:pk>/', location_feature.LocationFeatureDetailView.as_view(), name='view--location-features'),
   # Section details views, normally loaded into main page via AJAX after a form post.
   path('location-feature/<str:pk>/view/general', location_feature__general.LocationFeatureDetailGeneralView.as_view(), name='view--location-feature--general'),
+  path('location-feature/<str:pk>/view/potential-threats', location_feature__potential_threats.LocationFeatureDetailPotentialThreatsView.as_view(), name='view--location-feature--potential-threats'),
   path('location-feature/<str:pk>/view/damage-occurrences', location_feature__damage_occurrences.LocationFeatureDetailDamageOccurrencesView.as_view(), name='view--location-feature--damage-occurrences'),
   # Individual section forms, loaded via AJAX.
   path('location-feature/<str:pk>/update/general', location_feature__general.LocationFeatureUpdateGeneralView.as_view(), name='update--location-feature--general'),
+  path('location-feature/<str:pk>/update/potential-threats', location_feature__potential_threats.LocationFeatureUpdatePotentialThreatsView.as_view(), name='update--location-feature--potential-threats'),
   path('location-feature/<str:pk>/update/damage-occurrences', location_feature__damage_occurrences.LocationFeatureUpdateDamageOccurrencesView.as_view(), name='update--location-feature--damage-occurrences'),
 ]

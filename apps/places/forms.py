@@ -12,6 +12,7 @@ from .models import LocationFeature
 from .models import LocationFeatureGrading
 from .models import LocationFeatureType
 from .models import DamageOccurrence
+from .models import PotentialThreat
 from django_select2 import forms as s2forms
 from django.forms import ModelChoiceField
 
@@ -322,6 +323,32 @@ LocationFeatureDamageOccurrencesFormSet = forms.inlineformset_factory(
 
 # Form class for the list wrapper.
 class LocationFeatureUpdateDamageOccurrencesContainerForm(forms.ModelForm):
+  class Meta:
+    model = LocationFeature
+    fields = [ ]
+
+
+#####################
+# Potential threats #
+#####################
+
+# Formset factory for potential threats.
+LocationFeaturePotentialThreatsFormSet = forms.inlineformset_factory(
+  LocationFeature,
+  PotentialThreat,
+  fields = (
+    'threat_type_key',
+    'threat',
+    'comment',
+  ),
+  labels = {
+    'threat_type_key': _('Type'),
+  },
+  extra=1
+)
+
+# Form class for the list wrapper.
+class LocationFeatureUpdatePotentialThreatsContainerForm(forms.ModelForm):
   class Meta:
     model = LocationFeature
     fields = [ ]

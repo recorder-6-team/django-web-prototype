@@ -1,0 +1,13 @@
+{# Snippet to view location feature - potential threats #}
+
+{% load i18n %}
+{% load recorder_filters %}
+{% if object.potential_threats.all %}
+  <ul>
+  {% for threat in object.potential_threats.all %}
+    <li>{{ threat.threat_type_key }} | {{ threat.threat }} </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="alert alert-secondary">{% translate 'There are no potential threats linked to this feature.' %}</p>
+{% endif %}
