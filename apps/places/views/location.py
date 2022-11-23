@@ -71,11 +71,5 @@ class LocationDetailView(DetailView):
         'places/js/formEditButtons.js',
         'places/js/locationNamesForm.js',
       ]
-      context['recorderData'] = {
-        'centreMap': {
-          'lat': self.object.lat,
-          'lon': self.object.long,
-        }
-      }
     return context
 

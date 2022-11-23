@@ -37,10 +37,4 @@ class LocationFeatureDetailView(DetailView):
         'places/js/initMap.js',
         'places/js/locationFeatureFormEditButtons.js',
       ]
-      context['recorderData'] = {
-        'centreMap': {
-          'lat': self.object.location_key.lat,
-          'lon': self.object.location_key.long,
-        }
-      }
     return context
