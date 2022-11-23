@@ -13,3 +13,33 @@
   <input type="submit" class="btn btn-secondary" name="cancel" value="{% translate 'Cancel' %}">
 </form>
 {% endblock %}
+
+{% block js %}
+<script language="javascript">
+  recorder.data.gradingsList = {{ form.gradings | safe }};
+
+  function limitFeatureGradingsByType() {
+    const oldGradingsVal = $('#id_feature_grading_key').val();
+    const typeVal = $('#id_feature_type').val();
+    $('#id_feature_grading_key option[value!=""]').remove();
+    $.each(recorder.data.gradingsList[typeVal], function(key, label) {
+      $('#id_feature_grading_key').append('<option value="' + key + '">' + label + '</option>');
+    });
+    $('#id_feature_grading_key option[value="' + oldGradingsVal + '"]').attr('selected', true);
+  }
+  // Use the selected grading to select the correct type.
+  // First loop to find the lists of gradings for each type.
+  $.each(recorder.data.gradingsList, function(typeKey, listForType) {
+    // Now loop within the gradings for the type - if found, then select the type.
+    $.each(listForType, function(gradingKey) {
+      if (gradingKey === $('#id_feature_grading_key').val()) {
+        $('#id_feature_type').val(typeKey);
+      }
+    })
+  });
+
+  // Hook up the link between the 2 lists.
+  $('#id_feature_type').change(limitFeatureGradingsByType);
+  limitFeatureGradingsByType();
+</script>
+{% endblock %}

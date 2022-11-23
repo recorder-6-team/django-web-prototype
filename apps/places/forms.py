@@ -9,7 +9,10 @@ from .models import LocationRelation
 from .models import Tenure
 from .models import LocationUse
 from .models import LocationFeature
+from .models import LocationFeatureGrading
+from .models import LocationFeatureType
 from django_select2 import forms as s2forms
+from django.forms import ModelChoiceField
 
 ####################################
 # Re-usable Select2 search widgets #
@@ -276,11 +279,23 @@ class LocationUpdateOtherApproachForm(forms.ModelForm):
 ###########
 
 class LocationFeatureUpdateGeneralForm(forms.ModelForm):
+
+  feature_type = ModelChoiceField(queryset=LocationFeatureType.objects.all())
+
   class Meta:
     model = LocationFeature
     fields = [
       'item_name',
-      'comment',
+      'feature_type',
+      'feature_grading_key',
       'date_from',
       'date_to',
+      'comment',
     ]
+
+  # Data for the gradings/type linked list.
+  gradings = {}
+  for grading in LocationFeatureGrading.objects.all():
+    if not grading.location_feature_type_key.short_name in gradings:
+      gradings[grading.location_feature_type_key.location_feature_type_key] = {}
+    gradings[grading.location_feature_type_key.location_feature_type_key][grading.feature_grading_key] = grading.short_name
