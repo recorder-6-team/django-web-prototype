@@ -83,6 +83,9 @@ class LocationFeature(models.Model):
         managed = False
         db_table = 'LOCATION_FEATURE'
 
+    def __str__(self):
+        return self.item_name
+
 
 class LocationFeatureGrading(models.Model):
     feature_grading_key = FixedCharField(db_column='FEATURE_GRADING_KEY', primary_key=True, max_length=16)
@@ -101,6 +104,9 @@ class LocationFeatureGrading(models.Model):
         managed = False
         db_table = 'LOCATION_FEATURE_GRADING'
 
+    def __str__(self):
+        return self.short_name
+
 
 class LocationFeatureType(models.Model):
     location_feature_type_key = FixedCharField(db_column='LOCATION_FEATURE_TYPE_KEY', primary_key=True, max_length=16)
@@ -117,6 +123,9 @@ class LocationFeatureType(models.Model):
     class Meta:
         managed = False
         db_table = 'LOCATION_FEATURE_TYPE'
+
+    def __str__(self):
+        return self.short_name
 
 
 class LocationName(models.Model):
