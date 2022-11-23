@@ -1,0 +1,15 @@
+{# Snippet to view location feature - damage occurrences #}
+
+{% load i18n %}
+{% load recorder_filters %}
+{% if object.damage_occurrences.all %}
+  <ul>
+  {% for damage in object.damage_occurrences.all %}
+    <li>{{ damage.vague_date_start}}
+      {% if damage.comment %}<p>{{ damage.comment }}</p>{% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p class="alert alert-secondary">{% translate 'There are no damage occurrences linked to this feature.' %}</p>
+{% endif %}

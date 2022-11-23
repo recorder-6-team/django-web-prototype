@@ -1,0 +1,19 @@
+{# Geo info - damages occurrences section update form for a location feature #}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load recorder_filters %}
+
+{% block content %}
+
+<form method="post" class="section-form" data-section="damage-occurrences">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% translate 'Damage occurrences' %}</legend>
+    {% crispy formset_list formset_helper %}
+  </fieldset>
+  <button class="btn btn-success add-form-row" data-section="damage-occurrences" data-relation="damage_occurrences" type="button" title="{% translate 'Add a damage occurrence' %}"><i class="fa-solid fa-plus"></i></button>
+  <input type="submit" class="btn btn-primary" value="{% translate 'Update' %}">
+  <input type="submit" class="btn btn-secondary" name="cancel" value="{% translate 'Cancel' %}">
+</form>
+{% endblock %}

@@ -24,6 +24,20 @@
     </div>
   </section>
 
+  <section class="card">
+    <div class="card-header">
+      <a href="#collapse-damage-occurrences" data-bs-toggle="collapse" class="card-title">{% translate 'Damage occurrences' %}</a>
+      <button class="btn btn-light btn-sm section-edit-btn float-end" data-section="damage-occurrences">{% fa6_icon 'pen-to-square' 'fa-solid' %}</button>
+    </div>
+    <div id="collapse-damage-occurrences" class="collapse" data-bs-parent="#accordion">
+      <div class="card-body">
+        <div class="panel-cntr-damage-occurrences">
+          {% include 'location_features/panels/damage-occurrences.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
+
 </article>
 
 {% endblock %}

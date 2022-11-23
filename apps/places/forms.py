@@ -11,6 +11,7 @@ from .models import LocationUse
 from .models import LocationFeature
 from .models import LocationFeatureGrading
 from .models import LocationFeatureType
+from .models import DamageOccurrence
 from django_select2 import forms as s2forms
 from django.forms import ModelChoiceField
 
@@ -299,3 +300,28 @@ class LocationFeatureUpdateGeneralForm(forms.ModelForm):
     if not grading.location_feature_type_key.short_name in gradings:
       gradings[grading.location_feature_type_key.location_feature_type_key] = {}
     gradings[grading.location_feature_type_key.location_feature_type_key][grading.feature_grading_key] = grading.short_name
+
+
+######################
+# Damage occurrences #
+######################
+
+# Formset factory for damage occurrences.
+LocationFeatureDamageOccurrencesFormSet = forms.inlineformset_factory(
+  LocationFeature,
+  DamageOccurrence,
+  fields = (
+    'vague_date_start',
+    'comment',
+  ),
+  labels = {
+    'vague_date_start': _('Date'),
+  },
+  extra=1
+)
+
+# Form class for the list wrapper.
+class LocationFeatureUpdateDamageOccurrencesContainerForm(forms.ModelForm):
+  class Meta:
+    model = LocationFeature
+    fields = [ ]

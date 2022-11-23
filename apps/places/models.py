@@ -128,6 +128,24 @@ class LocationFeatureType(models.Model):
         return self.short_name
 
 
+class DamageOccurrence(models.Model):
+    damage_occurrence_key = FixedCharField(db_column='DAMAGE_OCCURRENCE_KEY', primary_key=True, max_length=16)
+    comment = models.TextField(db_column='COMMENT', blank=True, null=True)
+    vague_date_start = VagueDateField(db_column='VAGUE_DATE_START', max_length=50, blank=True, null=True)
+    vague_date_end = models.IntegerField(db_column='VAGUE_DATE_END', blank=True, null=True)
+    vague_date_type = models.CharField(db_column='VAGUE_DATE_TYPE', max_length=2)
+    location_feature_key = models.ForeignKey('LocationFeature', models.DO_NOTHING, db_column='LOCATION_FEATURE_KEY', related_name='damage_occurrences')
+    entered_by = FixedCharField(db_column='ENTERED_BY', max_length=16)
+    entry_date = models.DateTimeField(db_column='ENTRY_DATE')
+    changed_by = FixedCharField(db_column='CHANGED_BY', max_length=16, blank=True, null=True)
+    changed_date = models.DateTimeField(db_column='CHANGED_DATE', blank=True, null=True)
+    custodian = FixedCharField(db_column='CUSTODIAN', max_length=8, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'DAMAGE_OCCURRENCE'
+
+
 class LocationName(models.Model):
     location_name_key = FixedCharField(db_column='LOCATION_NAME_KEY', primary_key=True, max_length=16)
     item_name = models.CharField(db_column='ITEM_NAME', max_length=100)
