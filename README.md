@@ -28,6 +28,17 @@ running,
 
 ## Installation on the Windows Subsystem for Linux with Ubuntu
 
+### Prerequisites
+
+* Windows 10 or 11 is required for the Windows Subsystem for Linux feature.
+* The installation assumes that you have an installation of Recorder 6 available either on the
+machine you are installing onto, or on the network where the database connection has been tested
+from this machine.
+
+**Please create a copy of your Recorder 6 database in order to test this prototype.**
+
+### Steps
+
 Windows 10 and later have a feature called Windows Subsystem for Linux (WSL) which allows the Linux
 operating system environment to run as an application inside Windows. We can run the Recorder 6 web
 application on WSL which avoids the need to install some large components required to run certain
@@ -74,6 +85,7 @@ $ cd rec6
 ```bash
 $ chmod +x install-packages.sh
 $ sudo ./install-packages.sh
+$ git checkout install-packages.sh
 ```
 
 Now, follow the steps described below to configure the connection from the Recorder 6 web
