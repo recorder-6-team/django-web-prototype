@@ -65,6 +65,10 @@ filedata = filedata.replace('{{ recorder_site_id }}', siteId)
 from recorder.local_settings import DATABASES
 import pyodbc
 
+# Create the local settings file with the user input parameter values added.
+with open('recorder/local_settings.py', 'w') as file:
+  file.write(filedata)
+
 try:
   cnxnStr = ("Driver=" + DATABASES['default']['OPTIONS']['driver'] + ";"
               "Server=" + DATABASES['default']['HOST'] + ";"
@@ -75,11 +79,7 @@ try:
 except Exception as error:
   print('The connection to SQL Server failed. Please review the settings in recorder/local_settings.py or run setup.py again.')
   print('The error message was: ' + repr(error))
-  sys.exit("Configuration failed and the local settings file has not been created.")
-
-# Create the local settings file with the user input parameter values added.
-with open('recorder/local_settings.py', 'w') as file:
-  file.write(filedata)
+  sys.exit("Configuration failed.")
 
 # Run the user table update script - it is safe to re-run multiple times.
 cursor = cnxn.cursor()
