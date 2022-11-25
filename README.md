@@ -3,15 +3,106 @@
 This repository contains the code for a prototype illustrating the potential to use Python and
 Django to develop a web application replacement for Recorder 6.
 
-**Do not use this prototype on a production databas.**
+**Do not use this prototype on a production database.**
 
 The prototype currently implements a very small section of Recorder 6 functionality, namely the
-login form, plus a tree browser for locations and the ability to edit the names or other basic
-fields of a location.
+login form, plus a tree browser for viewing and editing locations and features.
 
-## Installation
+## Installation options
 
-At this point, as this is a prototype the installation requires some manual steps and configration.
+Currently, there are 3 possible approaches to installing the Recorder 6 web-based prototype. Note
+that you are installing a web-server, not a Windows application, and as such the installation is
+more complex than a typical desktop application. However the installation only needs to be
+performed once and it can then be shared by multiple users across a network, or even across the
+internet. Furthermore upgrades only need to be performed in one place since the application is
+accessed via a web browser.
+
+Three options for installation are provided:
+
+1. Installation on the Windows Subsystem for Linux with Ubuntu
+2. Manual installation directly onto your machine
+3. Installation using Vagrant
+
+Installation on the Windows Subsystem for Linux with Ubuntu is the most efficient way to get up and
+running,
+
+## Installation on the Windows Subsystem for Linux with Ubuntu
+
+Windows 10 and later have a feature called Windows Subsystem for Linux (WSL) which allows the Linux
+operating system environment to run as an application inside Windows. We can run the Recorder 6 web
+application on WSL which avoids the need to install some large components required to run certain
+Django modules on Windows, which are not required when running on Linux. Although you do need to
+install a couple of applications and run some setup commands, the actual steps required should
+individually be fairly simple.
+
+There is documentation on installation of WSL and Ubuntu at
+https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview. Both
+are available as Windows applications in the Microsoft Store. You do not need to perform the steps
+under the section "Install and use a GUI package" since we only need the main server components,
+not the Ubuntu desktop.
+
+Once you get to the end of step 4 - Configure Ubuntu, you should have a command line "shell"
+running for your Ubuntu environment. Before we go any further though, we need to modify the Windows
+Firewall so that it allows WSL to connect to SQL Server. See https://stackoverflow.com/questions/66126604/connect-local-sql-server-from-wsl2-ubuntu
+for an explanation. To make this change:
+
+1. Press the Windows key and type "cmd".
+2. Select "Run as administrator" for the Command Prompt application and click Yes on the User
+   Account Control popup box.
+3. Copy and paste the following command and run it (without the $ prefix):
+   ```bash
+   $ netsh advfirewall firewall add rule name=WSL_SQL dir=in protocol=tcp action=allow localport=1433 remoteip=localsubnet profile=any
+   ```
+
+Now close the Windows Command Prompt.
+
+Next, because you are connecting to SQL Server from one machine to another (even though one machine
+is virtual) you need to configure SQL Server for network access as described at the following link:
+[Configure SQL Server for network access](docs/configure-sqlserver-network).
+
+Return to the Ubuntu shell window. Here are the commands you will need to copy and paste into the
+shell and run, one at a time, with explanations for what each does. Note that you do not need to
+copy the $ at the start of each statement:
+
+1. Get the latest Recorder 6 web application source code into a subfolder called `rec6`.
+```bash
+$ git clone https://github.com/recorder-6-team/django-web-prototype.git rec6
+$ cd rec6
+```
+
+2. Set the permissions then run a script that installs various required installation packages:
+```bash
+$ chmod +x install-packages.sh
+$ sudo ./install-packages.sh
+```
+
+Now, follow the steps described below to configure the connection from the Recorder 6 web
+application to SQL Server:
+[Run the setup script](docs/run-setup-script)
+
+Once the setup script has been run with no errors, you can prepare the Django migrations:
+```bash
+$ python manage.py migrate
+```
+
+Then you should be ready to start the Recorder 6 application as follows:
+```bash
+$ python3 manage.py runserver
+```
+
+This will start the Python script which runs the Django web-server process. You should see
+something similar to the following output in the shell when the application is ready:
+```
+Django version 4.0.7, using settings 'recorder.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+```
+
+The application can now be accessed at using a web browser at http://127.0.0.1:8000/.
+
+## Manual installation
+
+At this point, as this is a prototype the installation requires some manual steps and configuration.
 Although the installation isn't trivial, please note that the prototype only needs to be installed
 on a single machine as the application can run from a web-browser anywhere on the network.
 
@@ -74,44 +165,9 @@ from this machine.
      re-start the virtual environment.
    * If running Mac or Linux and you find any of the commands fail due to lack of permissions,
      re-run the command with `sudo ` added to the start of the command:
-6. In your installation folder, find the file `recorder/local_settings.example.py` and copy it to
-   `recorder/local_settings.py`. Edit it in a text editor. You will need to find and replace the following
-   tokens as follows:
-     * `{{ recorder_secret_key }}` - this must be replaced with a unique secret for your installation to
-       ensure it is secure. You can generate a secret using a tool built into Django using the
-       Python shell by running the following commands from your command prompt. The first command
-       starts the shell, then the >>> indicates that subsequent commands will run using the Python
-       interpreter:
-       ```
-       python
-       >>> from django.core.management import utils
-       >>> print(utils.get_random_secret_key())
-       >>> exit()
-       ```
-     * `{{ recorder_database_name }}` - The name of the database you are
-       connecting to. For production this would typically be `NBNData` but make
-       sure you are using a copy for testing the prototype.
-     * `{{ recorder_database_host }}` - The SQL Server instance name you are
-       connecting to. The correct setting for this can be obtained from Recorder
-       6's registry setting at `HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Dorset
-       Software\Recorder 6` under the key called `Server Name`.
-     * `{{ recorder_organisation_name }}` - just set this to the name or your
-       organisation would like to be indentified as.
-     * `{{ recorder_site_id }}` - your installation Site ID. For testing only, this can be set to `TESTDATA`.
-
-   Now save the file. Note - if you are connecting from a non-Windows machine you will need to
-   alter the database configuration in the settings file appropriately. More information is
-   available at https://github.com/microsoft/mssql-django.
-
-   Also, note that the database connection configuration given here requires Windows Authentication
-   to be enabled. If you would prefer to connect as a named user, you can set the `USER`, `PASSWORD`
-   and `Trusted_Connection=no` options as described at https://github.com/microsoft/mssql-django.
-   The connection method you use must be for a user with rights to select and modify data in the
-   `NAME`, `USER`, `LOCATION`, `LOCATION_NAME` and `LOCATION_TYPE` tables.
-7. Django provides built in functionality for handling user login. In order to make the Recorder 6
-   `USER` table compatible with this functionality, you need to run the contents of each script in
-   the `sqlserver_scripts` folder against your test database copy, e.g. using SQL Management
-   Studio.
+6. Now, follow the steps described below to configure the connection from the Recorder 6 web
+   application to SQL Server:
+   [Run the setup script](docs/run-setup-script)
 8. Finally, run the following from your command-prompt/terminal in order to prepare the database:
    ```
    python manage.py migrate
@@ -143,6 +199,11 @@ Quit the server with CTRL-BREAK.
 You can access the prototype by copying http://127.0.0.1:8000/ into your browser address bar.
 
 # Installing and running through vagrant
+
+TODO - Update from Vagrant installation notes
+
+To install VirtualBox, which acts as a host for the virtual machine running Recorder 6, see
+[VirtualBox installation notes](docs/install-virtual-box).
 
 1. Install vagrant
 2. Install ansible
