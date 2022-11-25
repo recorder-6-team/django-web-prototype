@@ -61,13 +61,13 @@ filedata = filedata.replace('{{ recorder_database_password }}', password)
 filedata = filedata.replace('{{ recorder_organisation_name }}', organisation)
 filedata = filedata.replace('{{ recorder_site_id }}', siteId)
 
-# Now test the connection.
-from recorder.local_settings import DATABASES
-import pyodbc
-
 # Create the local settings file with the user input parameter values added.
 with open('recorder/local_settings.py', 'w') as file:
   file.write(filedata)
+
+# Now test the connection.
+from recorder.local_settings import DATABASES
+import pyodbc
 
 try:
   cnxnStr = ("Driver=" + DATABASES['default']['OPTIONS']['driver'] + ";"
