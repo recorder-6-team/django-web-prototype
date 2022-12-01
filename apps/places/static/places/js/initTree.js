@@ -55,9 +55,15 @@ $(document).ready(function() {
    * @param array point
    *   X, y coordinate array in GPS lat long.
    */
-  function showMapMarker(point) {
+  recorder.fns.showMapMarker = (point) => {
     const marker = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat(point)));
     const view = recorder.map.getView();
+    // Clear existing.
+    var features = recorder.markerLayer.getSource().getFeatures();
+    features.forEach((feature) => {
+      recorder.markerLayer.getSource().removeFeature(feature);
+    });
+    // Add new feature.
     recorder.markerLayer.getSource().addFeature(marker);
     view.setCenter(ol.proj.fromLonLat(point));
     // Set an arbitrary zoom. Would be better if this could be set
@@ -77,7 +83,7 @@ $(document).ready(function() {
             url: "{% url 'places:view--locations' 'key_arg' %}".replace('key_arg', key),
             success : function(data) {
               $('#selection-pane').html(data);
-              showMapMarker([$('#map-long').val(), $('#map-lat').val()]);
+              recorder.fns.showMapMarker([$('#map-long').val(), $('#map-lat').val()]);
             }
           });
           break;
@@ -87,7 +93,7 @@ $(document).ready(function() {
             url: "{% url 'places:view--location-features' 'key_arg' %}".replace('key_arg', key),
             success : function(data) {
               $('#selection-pane').html(data);
-              showMapMarker([$('#map-long').val(), $('#map-lat').val()]);
+              recorder.fns.showMapMarker([$('#map-long').val(), $('#map-lat').val()]);
             }
           });
       }

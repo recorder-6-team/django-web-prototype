@@ -1,5 +1,6 @@
 window.recorder = {
-  data: {}
+  data: {},
+  fns: {}
 };
 /*
 Context data for the page can be injected as a json object in the recorder-data element.
