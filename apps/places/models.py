@@ -31,7 +31,7 @@ class LocationType(models.Model):
     def __str__(self):
         return self.short_name
 
-class Location(models.Model):
+class Location(RecorderBaseModel):
     location_key = FixedCharField(db_column='LOCATION_KEY', primary_key=True, max_length=16)
     description = RtfTextField(db_column='DESCRIPTION', blank=True, null=True)
     parent_key = models.ForeignKey('self', models.DO_NOTHING, db_column='PARENT_KEY', blank=True, null=True)
