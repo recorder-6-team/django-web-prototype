@@ -39,6 +39,11 @@ $(document).ready(function() {
       data: formData
     }).done(function(response) {
       $('.panel-cntr-' + section).html(response);
+      // Show updated location on the map.
+      if ($('.panel-cntr-' + section).find('#update-lonlat').length > 0) {
+        lonLat = $('.panel-cntr-' + section).find('#update-lonlat').val().split(',');
+        recorder.fns.showMapMarker(lonLat);
+      }
     }).fail(function() {
       // TODO better handling.
       console.log('Form post failed');
